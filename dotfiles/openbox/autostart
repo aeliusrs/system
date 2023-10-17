@@ -1,0 +1,7 @@
+sh -c ~/.scripts/hdmi_layout &
+feh --bg-fill ~/.wallpaper/sharp
+#dunst &
+sh -c picom &
+$HOME/.config/polybar/bar.sh &
+sh -c $HOME/.config/scripts/kblayout &
+#sh -c /bin/lxpolkit

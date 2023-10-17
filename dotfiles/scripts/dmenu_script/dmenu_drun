@@ -1,0 +1,7 @@
+#!/bin/zsh
+menu=$(ls /usr/share/applications/*.desktop | xargs -n1 basename)
+menu_list=$(echo -e $menu | sed -e 's/\.desktop//g')
+Location="/usr/share/applications"
+Selection=$(printf "%s\n" $menu_list | dmenu -b -i -nb '#151515' -nf '#e0e0e0' -sb '#e0e0e0' -sf '#151515' -h '25' -fn 'ProFontWindows:style=regular:size=12')
+Launch=$(echo "${Selection}.desktop")
+awk '/^Exec=/ {sub("^Exec=", ""); gsub(" ?%[cDdFfikmNnUuv]", ""); exit system($0)}' $Location/$Launch

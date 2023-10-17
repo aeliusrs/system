@@ -1,0 +1,8 @@
+#mkdir vid
+#mv *.webm *.mkv *.mp4 vid
+#rm -rf vid
+
+ls -1 *.mp3 | sed 's/ \[.*\]\.mp3/\.mp3/'
+
+for i in *.mp3; do mv "$i" "$(echo "$i" | sed 's/ \[.*\]\.mp3/\.mp3/')"; done
+

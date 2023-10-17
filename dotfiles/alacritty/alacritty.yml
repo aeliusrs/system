@@ -1,0 +1,23 @@
+window:
+  opacity: 0.98
+  padding:
+    x: 25
+    y: 25
+
+    dynamic_padding:  true
+    decoration: none
+
+font:
+  normal:
+    family: ProFontWindows
+    style: Regular
+  size: 13.0
+
+
+colors:
+  # Default colors
+  primary:
+    #background: '0x1f202a'
+    #background: '0x11141F'
+    background: '0x161720'
+    foreground: '0xe0e0e0'

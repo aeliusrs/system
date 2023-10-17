@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#HMDI_ACT="$(cat /sys/class/drm/card0/*HDMI*/status | grep '^connected')"
+
+#if [[ ! -z "$HMDI_ACT" ]]
+#then
+#	echo "HMDI IS CONNECTED";
+#	xrandr --output HDMI-2 --same-as eDP-1
+#	xrandr --output eDP-1 --off
+#else
+#	echo "HDMI IS NOT CONNECTED";
+#	Turn on standart display
+#	xrandr --output eDP-1 --on
+#fi
+
+
+#CURRENT_USER=$(who -u | awk '{ print $1 "" }')
+
+#if [[ ! -z "$CURRENT_USER" ]]
+#then
+#	exit 0
+#fi
+
+#export XAUTHORITY=/run/lightdm/$CURRENT_USER/xauthority
+#export DISPLAY=:0
+HMDI_ACT="$(cat /sys/class/drm/*HDMI*/status | grep '^connected')"
+
+if [[ ! -z "$HMDI_ACT" ]]
+then
+	echo "HDMI IS CONNECTED - $(date)"
+	xrandr --output 'HDMI-2' --auto
+	echo $?
+	xrandr --output 'eDP-1' --right-of 'HDMI-2' --primary
+	echo $?
+else
+	echo "HDMI IS NOT CONNECTED - $(date)"
+	xrandr --output 'HDMI-2' --off
+	echo $?
+	xrandr --output 'eDP-1' --primary --auto
+	echo $?
+fi
+
+kill -s USR1 $(pgrep polybar)

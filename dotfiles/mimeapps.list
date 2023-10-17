@@ -1,0 +1,33 @@
+[Default Applications]
+inode/directory=pcmanfm.desktop
+xdg-mime=pcman-fm.desktop
+default=pcman-fm.desktop
+zathura.desktop=pcman-fm.desktop
+applications/pdf=zathura.desktop
+nvim.desktop=pcman-fm.desktop
+text/plain=pcman-fm.desktop
+viewnior.desktop=pcman-fm.desktop
+image/png=viewnior.desktop
+image/jpg=viewnior.desktop
+image/jpeg=viewnior.desktop
+vlc.desktop=pcman-fm.desktop
+audio/mp3=pcman-fm.desktop
+video/mp4=pcman-fm.desktop
+video/flv=pcman-fm.desktop
+video/mkv=pcman-fm.desktop
+audio=pcman-fm.desktop
+video=pcman-fm.desktop
+applications/pdf=zathura.desktop
+application/pdf=org.pwmt.zathura.desktop
+image=viewnior.desktop
+text/html=brave-browser.desktop
+x-scheme-handler/http=brave-browser.desktop
+x-scheme-handler/https=brave-browser.desktop
+x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/unknown=brave-browser.desktop
+image/avif=viewnior.desktop
+
+[Added Associations]
+application/pdf=org.pwmt.zathura.desktop;
+video/webm=soundconverter.desktop;
+image/avif=viewnior.desktop;

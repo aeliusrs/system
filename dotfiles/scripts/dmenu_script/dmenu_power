@@ -1,0 +1,24 @@
+#!/bin/zsh
+
+# dmenu to change runstate using systemd
+LOCKSCRIPT="$HOME/.scripts/lock"
+
+# menu defined as an associative array
+typeset -A menu
+menu=(
+[Shutdown]="systemctl poweroff"
+[Reboot]="systemctl reboot"
+[Halt]="systemctl halt"
+[Lock]="${LOCKSCRIPT}"
+[Logout]="pkill -SIGTERM -f openbox"
+[Cancel]=""
+)
+menu_nrows=${#menu[@]}
+menu_list="Lock\nLogout\nReboot\nShutdown\nCancel\n"
+
+Selection=$(echo -e ${menu_list} | dmenu -b -i -nb '#151515' -nf '#e0e0e0' -sb '#e0e0e0' -sf '#151515' -h '25' -fn 'ProFontWindows:style=regular:size=12')
+zsh -c "exec ${menu[${Selection}]}"
+
+#LOGOUT 
+#pkill -SIGTERM -f lxsession
+

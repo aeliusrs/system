@@ -1,0 +1,63 @@
+#!/bin/zsh
+
+# $./brightness up
+# $./brightness down
+# Make the bar with the special character ─ (it's not dash -)
+
+function set_brightness () {
+
+	basedir="/sys/class/backlight/"
+	handler=$basedir$(ls $basedir)"/"
+
+	# get current & max brightness
+	old_brightness=$(cat $handler"brightness")
+	max_brightness=$(cat $handler"max_brightness")
+
+	# Calculate new own
+	old_brightness_p=$(( 100 * $old_brightness / $max_brightness ))
+	new_brightness_p=$(($old_brightness_p $1))
+	new_brightness=$(( $max_brightness * $new_brightness_p / 100 ))
+
+	echo $old_brightness
+	echo $new_brightness
+
+	# Writing the new brightness
+	#sudo chmod 666 $handler"brightness"
+	#if [ $new_brightness -gt 4735 ]
+	#then
+	echo "${new_brightness}" > $handler"brightness"
+}
+
+function send_brightness {
+	basedir="/sys/class/backlight/"
+	handler=$basedir$(ls $basedir)"/"
+	old_brightness=$(cat $handler"brightness")
+	max_brightness=$(cat $handler"max_brightness")
+
+	NB=$(( 100 * $old_brightness / $max_brightness ))
+	IND=10;
+	while [ $IND -le 95 ]
+	do
+		if [ $NB -ge $IND ]
+		then
+#			STR="${STR}─";
+			STR="${STR}·";
+		else
+			STR="${STR} ";
+		fi
+		IND=$(($IND + 5));
+	done
+	STR="${STR}|";
+	$HOME/.scripts/notify-send -t 2000 "   ($NB)  $STR" --replace=555
+}
+
+case $1 in
+    up)
+	set_brightness "+5";
+	send_brightness
+	;;
+    down)
+	set_brightness "-5";
+	send_brightness
+	;;
+esac

@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+VAL=$(/dev/input/by-id/*-kbd 2>&1)
+VAL=$(echo $VAL | grep -v mouse)
+
+setxkbmap -option compose:ralt
+
+if [[ "$VAL" =~ "permission denied" ]]
+then
+	echo $VAL
+	exit;
+else
+	setxkbmap -option caps:swapescape
+fi
+
+#xinput set-prop 15 328 1
+#xinput set-prop 12 331 1

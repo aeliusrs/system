@@ -1,0 +1,4 @@
+systemctl start bluetooth
+sleep(1);
+zsh -c pkill blueman-manager;
+zsh -c blueman-manager;

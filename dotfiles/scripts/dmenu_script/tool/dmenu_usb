@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+menu=($(ls /run/media/$USER/))
+menu_list=$(echo ${menu[@]} | sed -E -e 's/\s/\n/g')
+Selection=$(printf "%s\n" $menu_list | dmenu -i -p 'Device' -nb '#151515' -nf '#e0e0e0' -sb '#e0e0e0' -sf '#151515' -fn 'ProFontWindows:style=regular:size=10')
+Dev=$(lsblk | grep "$Selection" | grep -o "sdb[0-9]")
+udisksctl unmount -b /dev/$Dev
+#udiskie-umount /run/media/$USER/$Selection
+

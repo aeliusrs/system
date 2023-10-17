@@ -1,0 +1,70 @@
+#!/bin/zsh
+
+# $./volume up
+# $./volume down
+# $./volume mute
+# Make the bar with the special character ─ (it's not dash -)
+
+function get_volume {
+    amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+}
+
+function is_mute {
+    amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+}
+
+function send_volume {
+	volume=`get_volume`
+	bar=$(seq -s "─" $(($volume/5)) | sed 's/[0-9]//g')
+	NB=$(($volume + 0))
+	IND=0;
+	STR="|";
+	while [ $IND -le 95 ]
+	do
+		if [ $NB -ge $IND ]
+		then
+#			STR="${STR}─";
+			STR="${STR}·";
+		else
+			STR="${STR} ";
+		fi
+		IND=$(($IND + 5));
+	done
+	STR="${STR}|";
+	$HOME/.scripts/notify-send -t 2000 "   ($volume)  $STR" --replace=555
+}
+
+function send_muted {
+	$HOME/.scripts/notify-send "Sound Muted" --replace=555
+}
+
+case $1 in
+    up)
+	#amixer set Master 1+ unmute > /dev/null
+	#amixer -D pulse set Master 1+ on > /dev/null
+	amixer -q set Master 5%+ > /dev/null
+	if is_mute ; then
+		send_muted
+	else
+		send_volume
+	fi
+	;;
+    down)
+	#amixer set Master 1+ unmute > /dev/null
+	#amixer -D pulse set Master 1+ on > /dev/null
+	amixer -q set Master 5%- > /dev/null
+	if is_mute ; then
+		send_muted
+	else
+		send_volume
+	fi
+	;;
+    mute)
+	amixer -D pulse set Master toggle > /dev/null
+	if is_mute ; then
+		send_muted
+	else
+		send_volume
+	fi
+	;;
+esac

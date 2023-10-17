@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+if [ $# -ne 1 ]
+then
+	echo "Usage: set_wallpaper [ /file/path ]"
+	echo "Please only provide one file."
+	exit;
+elif [[ ! -e $1 ]]
+then
+	echo "File is not valid"
+	exit;
+elif [[ ! -f $1 ]]
+then
+	echo "Please provide a file"
+	exit;
+fi
+
+echo "Setting wallpaper"
+
+#rm -rf ~/.wallpaper/
+mkdir -p ~/.wallpaper/
+cp "$1" ~/.wallpaper/sharp
+
+echo "Creating dimmed version for lock"
+
+convert ~/.wallpaper/sharp  -fill black -colorize 65%  ~/.wallpaper/dimmed
+
+echo "Done !"
+
+feh --bg-fill ~/.wallpaper/sharp
+

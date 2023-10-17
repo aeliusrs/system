@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+# Date format, for use as the prompt.
+name=WINDOWS
+nb="#151515"
+nf="#e0e0e0"
+sb="#e0e0e0"
+sf="#151515"
+fn="ProfontWindows:style=regular:size=10"
+height=$(wmctrl -l | wc -l)
+
+# dmenu cannot display more than 30 lines, to avoid screen clutter.
+# Only relevant if you have more than 30 windows open.
+
+if [[ $height -gt 30 ]]
+	then heightfit=30
+	else heightfit=$height
+fi
+
+num=$(wmctrl -l | sed 's/  / /' | cut -d " " -f 4- | nl -w 3 -n rn | sed -r 's/^([ 0-9]+)[ \t]*(.*)$/\1 - \2/' | dmenu -b -p "$name" -l $heightfit -nb $nb -nf $nf -sb $sb -sf $sf -fn $fn | cut -d '-' -f -1)
+[[ -z "$num" ]] && exit
+wmctrl -l | sed -n "$num p" | cut -c -10 | xargs wmctrl -i -a

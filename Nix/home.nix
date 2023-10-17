@@ -23,6 +23,7 @@
     obconf
     pcmanfm
     mate.mate-utils
+    mate.mate-polkit
     alacritty
     vlc
     brave
@@ -35,7 +36,7 @@
     gcolor3
     galculator
     viewnior
-    transmission 
+    transmission
     soundconverter
     lxde.lxrandr
     lxappearance-gtk2

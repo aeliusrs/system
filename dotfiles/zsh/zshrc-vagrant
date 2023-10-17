@@ -1,0 +1,29 @@
+export ZSH=$HOME/.ocha-zsh
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export KEYTIMEOUT=1
+
+#export GDK_DPI_SCALE=1
+#export GTK_SCALE=2
+#export QT_SCREEN_SCALE_FACTORS=1
+
+source $ZSH/1-option.zsh
+source $ZSH/2-alias.zsh
+source $ZSH/3-syntax.zsh
+source $ZSH/4-git.zsh
+source $ZSH/5-vim.zsh
+source $ZSH/7-prompt.zsh
+
+# Add OCAML CONFIG
+eval $(opam env)
+
+#[ -n "$SSH_CONNECTION" ] && unset SSH_ASKPASS
+#export GIT_ASKPASS=
+#if [ "$TMUX" = "" ]; then tmux; fi
+
+
+# if git make a repo slow add
+	# git config --add oh-my-zsh.hide-dirty 1
+	#
+
+### man fc !!!
