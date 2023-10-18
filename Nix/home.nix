@@ -1,8 +1,16 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, lib, ... }:
+let
+  repository = ~/.system;
+in
 {
-  home.username = "aeliusrs";
-  home.homeDirectory = "/home/aeliusrs";
+
+  # Fetch Git repository
+  home.activation.getRepository = lib.hm.dag.entryAfter ["checkFilesChanged"] ''
+    ${pkgs.git}/bin/git -C ${builtins.toString repository} pull || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
+  '';
+
+  home.username = "oolong";
+  home.homeDirectory = "/home/oolong";
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -67,7 +75,79 @@
 
   programs.git = {
     enable = true;
-    userName = "aeliusrs";
+    userName = "oolong";
     userEmail = "asrs.contact+dev@gmail.com";
   };
+
+  # ========================================================================= #
+  # ------------------------------------------------------------------------- #
+  # Install Dotfiles
+
+  ## ZSH
+  home.file.".zshrc".source = "${repository}/dotfiles/zsh/zshrc";
+  home.file.".ocha-zsh" = {
+    source = "${repository}/dotfiles/zsh/ocha-zsh";
+    recursive = true;
+    force = true;
+  };
+
+  ## TMUX
+  home.file.".tmux.conf".source = "${repository}/dotfiles/tmux/tmux.conf";
+  home.file.".tmux" = {
+    source = "${repository}/dotfiles/tmux/tmux";
+    recursive = true;
+    force = true;
+  };
+
+  ## MIMEAPPS
+  home.file.".config/mimeapps.list".source = "${repository}/dotfiles/mimeapps.list";
+
+  ## ALACRITTY
+  home.file.".config/alacritty" = {
+    source = "${repository}/dotfiles/alacritty";
+    recursive = true;
+    force = true;
+  };
+
+  ## NVIM
+  home.file.".config/nvim" = {
+    source = "${repository}/dotfiles/nvim";
+    recursive = true;
+    force = true;
+  };
+
+  ## SCRIPTS
+  home.file.".scripts" = {
+    source = "${repository}/dotfiles/scripts";
+    recursive = true;
+    force = true;
+  };
+
+  ## OPENBOX
+  home.file.".config/openbox" = {
+    source = "${repository}/dotfiles/openbox";
+    recursive = true;
+    force = true;
+  };
+
+  ## PICOM
+  home.file.".config/picom" = {
+    source = "${repository}/dotfiles/picom";
+    recursive = true;
+    force = true;
+  };
+
+  ## POLYBAR
+  home.file.".config/polybar" = {
+    source = "${repository}/dotfiles/polybar";
+    recursive = true;
+    force = true;
+  };
+
+  # ========================================================================= #
+  # ------------------------------------------------------------------------- #
+  # Install Assets
+  # TODO
+
 }
+
