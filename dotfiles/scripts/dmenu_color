@@ -1,2 +1,2 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 dmenu_run -nb '#151515' -nf '#e0e0e0' -sb '#e0e0e0' -sf '#151515' -fn 'ProFontWindows:style=regular:size=10'

@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # dmenu to change runstate using systemd
 Location='$HOME/.scripts/dmenu_script/tool'
@@ -16,5 +16,5 @@ menu=(
 menu_nrows=${#menu[@]}
 menu_list="Network\nDevice\nScreen\nSound\nBluetooth\nCancel\n"
 
-Selection=$(echo -e ${menu_list} | dmenu -b -i -nb '#151515' -nf '#e0e0e0' -sb '#e0e0e0' -sf '#151515' -h '25' -fn 'ProFontWindows:style=regular:size=12')
+Selection=$(echo -e ${menu_list} | dmenu -b -i -nb '#151515' -nf '#e0e0e0' -sb '#e0e0e0' -sf '#151515' -fn 'ProFontWindows:style=regular:size=12')
 zsh -c "exec ${menu[${Selection}]}" && kill $POD

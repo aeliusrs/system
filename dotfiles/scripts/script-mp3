@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 #mkdir vid
 #mv *.webm *.mkv *.mp4 vid
 #rm -rf vid

@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 # notify-send.sh - drop-in replacement for notify-send with more features
 # Copyright (C) 2015-2019 notify-send.sh authors (see AUTHORS file)

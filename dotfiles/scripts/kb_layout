@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 VAL=$(/dev/input/by-id/*-kbd 2>&1)
 VAL=$(echo $VAL | grep -v mouse)

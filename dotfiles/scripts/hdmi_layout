@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #HMDI_ACT="$(cat /sys/class/drm/card0/*HDMI*/status | grep '^connected')"
 
