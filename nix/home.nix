@@ -154,6 +154,7 @@ in
   # Install Assets
 
   home.activation.setAssets = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p                               ~/.local/share
     cp -ru ${repository}/assets/fonts      ~/.local/share/fonts || :
     cp -ru ${repository}/assets/icons      ~/.icons || :
     cp -ru ${repository}/assets/themes     ~/.themes || :
