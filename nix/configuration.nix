@@ -11,7 +11,7 @@
   boot.loader.grub.useOSProber = true;
 
   # Hostname
-  networking.hostName = "oolong"; # Define your hostname.
+  networking.hostName = "koi"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -53,12 +53,11 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.aeliusrs = {
+  users.users.oolong = {
     isNormalUser = true;
     uid = 1000;
-    description = "Aelius Richardson Account";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ git ];
   };
 
   # Allow unfree packages
@@ -80,10 +79,10 @@
   system.activationScripts.makeDir = with pkgs; lib.stringAfter [ "var" ] ''
     mkdir -p /opt
 
-    mkdir -p /home/aeliusrs/Pictures /home/aeliusrs/Videos /home/aeliusrs/Music
-    mkdir -p /home/aeliusrs/Desktop /home/aeliusrs/Documents /home/aeliusrs/Downloads 
-    mkdir -p /home/aeliusrs/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/aeliusrs
-    chown -R 1000:1000 /home/aeliusrs
+    mkdir -p /home/oolong/Pictures /home/oolong/Videos /home/oolong/Music
+    mkdir -p /home/oolong/Desktop /home/oolong/Documents /home/oolong/Downloads 
+    mkdir -p /home/oolong/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/oolong
+    chown -R 1000:1000 /home/oolong
   '';
 
   # Enable the OpenSSH daemon.
