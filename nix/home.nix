@@ -65,6 +65,10 @@ in
     gnutar
     dmenu
     sshpass
+#    pipewire
+#    pipecontrol
+    pulseaudio
+    pavucontrol
   ];
 
  #xsession.enable = true;
@@ -149,10 +153,18 @@ in
   # ------------------------------------------------------------------------- #
   # Install Assets
 
-  home.activation.getRepository = lib.hm.dag.entryAfter ["checkFilesChanged"] ''
-    cp -rf ${repository}/assets/fonts ~/.local/share/fonts
-    cp -rf ${repository}/assets/icons ~/.icons
-    cp -rf ${repository}/assets/themes ~/.themes
+  home.activation.setAssets = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    cp -ru ${repository}/assets/fonts      ~/.local/share/fonts || :
+    cp -ru ${repository}/assets/icons      ~/.icons || :
+    cp -ru ${repository}/assets/themes     ~/.themes || :
+    chmod -R +w ~/.local/share/fonts || :
+    chmod -R +w ~/.icons || :
+    chmod -R +w ~/.themes || :
+  '';
+
+  home.activation.nvimSetup = lib.hm.dag.entryAfter ["setAssets"] ''
+    ${pkgs.neovim}/bin/nvim --headless +'PlugInstall' +qa || :
+    ${pkgs.neovim}/bin/nvim --headless +'UpdateRemotePlugins' +qa || :
   '';
 
 }
