@@ -5,12 +5,21 @@ in
 {
 
   # Fetch Git repository
-#  home.activation.getRepository = lib.hm.dag.entryAfter ["checkFilesChanged"] ''
-#    ${pkgs.git}/bin/git -C ${builtins.toString repository} pull || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
-#  '';
+  home.activation.getRepository = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
+    ${pkgs.git}/bin/git -C ${builtins.toString repository} pull
+  '';
+#    || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
 
   home.username = "oolong";
   home.homeDirectory = "/home/oolong";
+
+  home.keyboard = {
+    layout = lib.mkForce "us";
+    options = lib.mkForce [
+      "caps:swapcaps"
+      "compose:ralt"
+    ];
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -64,15 +73,16 @@ in
     jq
     gnutar
     dmenu
+    networkmanager_dmenu
     sshpass
-#    pipewire
+    pipewire
 #    pipecontrol
-    pulseaudio
+#    pulseaudio
     pavucontrol
+    qjackctl
   ];
 
- #xsession.enable = true;
- #xsession.windowManager.openbox.enable = true;
+  programs.home-manager.enable = true;
 
   programs.zsh = {
     enable = true;
@@ -83,6 +93,8 @@ in
     userName = "oolong";
     userEmail = "asrs.contact+dev@gmail.com";
   };
+
+
 
   # ========================================================================= #
   # ------------------------------------------------------------------------- #
@@ -154,7 +166,6 @@ in
   # Install Assets
 
   home.activation.setAssets = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    mkdir -p                               ~/.local/share
     cp -ru ${repository}/assets/fonts      ~/.local/share/fonts || :
     cp -ru ${repository}/assets/icons      ~/.icons || :
     cp -ru ${repository}/assets/themes     ~/.themes || :
@@ -164,6 +175,7 @@ in
   '';
 
   home.activation.nvimSetup = lib.hm.dag.entryAfter ["setAssets"] ''
+    PATH=$PATH:${lib.makeBinPath [ pkgs.git pkgs.python311 ]}
     ${pkgs.neovim}/bin/nvim --headless +'PlugInstall' +qa || :
     ${pkgs.neovim}/bin/nvim --headless +'UpdateRemotePlugins' +qa || :
   '';
