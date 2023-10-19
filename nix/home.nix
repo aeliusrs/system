@@ -5,9 +5,9 @@ in
 {
 
   # Fetch Git repository
-  home.activation.getRepository = lib.hm.dag.entryAfter ["checkFilesChanged"] ''
-    ${pkgs.git}/bin/git -C ${builtins.toString repository} pull || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
-  '';
+#  home.activation.getRepository = lib.hm.dag.entryAfter ["checkFilesChanged"] ''
+#    ${pkgs.git}/bin/git -C ${builtins.toString repository} pull || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
+#  '';
 
   home.username = "oolong";
   home.homeDirectory = "/home/oolong";
@@ -64,6 +64,7 @@ in
     jq
     gnutar
     dmenu
+    sshpass
   ];
 
  #xsession.enable = true;
@@ -147,7 +148,12 @@ in
   # ========================================================================= #
   # ------------------------------------------------------------------------- #
   # Install Assets
-  # TODO
+
+  home.activation.getRepository = lib.hm.dag.entryAfter ["checkFilesChanged"] ''
+    cp -rf ${repository}/assets/fonts ~/.local/share/fonts
+    cp -rf ${repository}/assets/icons ~/.icons
+    cp -rf ${repository}/assets/themes ~/.themes
+  '';
 
 }
 

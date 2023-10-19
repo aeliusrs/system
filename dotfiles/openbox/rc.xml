@@ -294,22 +294,22 @@
     <!--            -->
     <keybind key="W-space">
       <action name="Execute">
-        <command>zsh ~/.config/scripts/dmenu_script/dmenu_drun</command>
+        <command>zsh ~/.scripts/dmenu_script/dmenu_drun</command>
       </action>
     </keybind>
     <keybind key="W-S-space">
       <action name="Execute">
-        <command>zsh ~/.config/scripts/dmenu_script/dmenu_tool</command>
+        <command>zsh ~/.scripts/dmenu_script/dmenu_tool</command>
       </action>
     </keybind>
     <keybind key="W-x">
       <action name="Execute">
-        <command>zsh ~/.config/scripts/dmenu_script/dmenu_power</command>
+        <command>zsh ~/.scripts/dmenu_script/dmenu_power</command>
       </action>
     </keybind>
     <keybind key="W-z">
       <action name="Execute">
-        <command>zsh ~/.config/scripts/dmenu_script/dmenu_switcher</command>
+        <command>zsh ~/.scripts/dmenu_script/dmenu_switcher</command>
       </action>
     </keybind>
     <keybind key="W-d">
