@@ -5,6 +5,6 @@ a NixOS &amp; Home-manager Based laptop configuration w/ Dotfiles
 
 1. install nixos via ISO on the machine
 2. Run as normal user `nix-shell -p git`
-3. git clone this repository
+3. git clone this repository in `~/.system`
 4. run the `install.sh` and wait for reboot
-5. welcome home
+5. Welcome Home
