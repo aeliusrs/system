@@ -1,0 +1,101 @@
+!# Zukitwo-OB by Larsson
+!# Updated 2014-06-04
+!# Openbox theme designed to match Zukitwo by http://lassekongo83.deviantart.com
+!# License: Creative Commons Attribution-ShareAlike 3.0 Unported (http://creativecommons.org/licenses/by-sa/3.0/)
+!# No attribution needed for non-commercial use. Attribution goes to the theme page on http://box-look.org/
+!# Buttons from Siva Flat: http://na12.deviantart.com dunno about the license here.
+
+
+border.width: 1
+padding.width: 3
+padding.height: 3
+window.handle.width: 0
+window.client.padding.width: 0
+window.client.padding.height: 0
+menu.overlap: -4
+*.justify: center
+
+
+!# Menu settings
+menu.border.width: 5
+menu.border.color: #f7f7f7
+
+menu.title.bg: solid flat
+menu.title.bg.color: #d1d1d1
+menu.title.text.color: #3c3c3c
+
+menu.items.bg: Flat Solid
+menu.items.bg.color: #f7f7f7
+menu.items.text.color: #3c3c3c
+menu.items.disabled.text.color: #aaaaaa
+
+menu.items.active.bg: Flat Gradient Vertical
+menu.items.active.bg.color: #8ba4b8
+menu.items.active.bg.colorTo: #7a94a9
+menu.items.active.bg.border.color: #88A1B6
+menu.items.active.text.color: #ffffff
+
+menu.separator.width: 1
+menu.separator.padding.width: 0
+menu.separator.padding.height: 3
+menu.separator.color: #aaaaaa
+
+
+!# Windows
+window.*.label.bg: Parentrelative
+window.*.border.color: #dedede
+window.*.handle.bg: Raised solid
+window.*.handle.bg.color: #dadada
+window.*.grip.bg: Raised solid
+window.*.grip.bg.color: #dadada
+window.*.title.separator.color: #d4d4d4
+
+window.active.title.bg: gradient vertical flat
+window.active.title.bg.color: #dedede
+window.active.title.bg.colorTo: #d4d4d4
+
+*.title.bg: gradient vertical flat
+*.title.bg.color: #dedede
+*.title.bg.colorTo: #d4d4d4
+
+
+window.*.button.*.bg: Parentrelative
+window.*.button.unpressed.image.color: #8d8d8d
+window.*.button.hover.image.color: #636363
+window.*.button.pressed.image.color: #000000
+window.*.button.toggled.unpressed.image.color: #8d8d8d
+window.*.button.toggled.hover.image.color: #636363
+
+
+!# Active
+window.active.label.text.color: #3c3c3c
+
+!# inactive
+window.inactive.label.text.color: #999999
+
+
+!# osd
+osd.border.width: 1
+osd.border.color: #aaaaaa
+osd.bg.border.color: #ffffff
+
+osd.bg: flat border gradient splitvertical
+osd.bg.color: #f0efee
+osd.bg.color.splitto: #f5f5f4
+osd.bg.colorTo: #eaebec
+osd.bg.colorTo.splitto: #e7e5e4
+
+osd.active.label.bg: parentrelative
+osd.active.label.bg.color: #f7f7f7
+osd.active.label.bg.border.color: #88A1B6
+osd.active.label.text.color: #111111
+
+osd.inactive.label.bg: parentrelative
+osd.inactive.label.text.color: #999999
+
+osd.hilight.bg: flat vertical gradient
+osd.hilight.bg.color: #8ba4b8
+osd.hilight.bg.colorTo: #7a94a9
+osd.unhilight.bg: flat vertical gradient
+osd.unhilight.bg.color: #babdb6
+osd.unhilight.bg.colorTo: #efefef
