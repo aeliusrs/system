@@ -83,7 +83,7 @@ in
 
   # Fix Shell for home-manager
   environment.shellInit = ''
-    export  NIXPATH="/nix/var/nix/profiles/per-user/${myuser}/channels:nixos-config=/etc/nixos/configuration.nix"
+    export  NIXPATH="/nix/var/nix/profiles/per-user/$USER/channels:nixos-config=/etc/nixos/configuration.nix"
   '';
 
   # Path

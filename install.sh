@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
-mkdir -p ~/.config/home-manager/
-cp ./nix/home.nix ~/.config/home-manager/home.nix
-
+# Prepare system
 sudo cp -f ./nix/configuration.nix /etc/nixos/configuration.nix
+sudo nix-channel --update #needed to update some nixpath for the user
+sudo nixos-rebuild switch
 
-sudo nixos-rebuild switch && home-manager switch
+# Prepare Home-manager
+home-manager init 
+cp -f ./nix/home.nix ~/.config/home-manager/home.nix
+home-manager switch
 
 reboot
