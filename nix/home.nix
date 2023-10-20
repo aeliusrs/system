@@ -105,13 +105,18 @@ in
   ## ZSH
   cp -f ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
   cp -rf ${repository}/dotfiles/zsh/ocha-zsh   ~/.ocha-zsh
+  chmod -Rv u+w ~/.ocha-zsh
+  chmod -Rv u+w ~/.zshrc
 
   ## TMUX
   cp -f ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
   cp -rf ${repository}/dotfiles/tmux/tmux      ~/.tmux
+  chmod -Rv u+w ~/.tmux
+  chmod -Rv u+w ~/.tmux.conf
 
   ## SCRIPTS
   cp -rf ${repository}/dotfiles/scripts        ~/.scripts
+  chmod -Rv u+w ~/.scripts
 
   ## MIMEAPPS
   cp -f ${repository}/dotfiles/mimeapps.list   ~/.config/mimeapps.list
@@ -132,10 +137,6 @@ in
   cp -rf ${repository}/dotfiles/polybar        ~/.config/polybar
 
   chmod -Rv u+w ~/.config
-  chmod -Rv u+w ~/.tmux
-  chmod -Rv u+w ~/.ocha-zsh
-  chmod -Rv u+w ~/.zshrc
-  chmod -Rv u+w ~/.tmux.conf
   '';
 
   # ========================================================================= #
