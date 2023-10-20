@@ -8,6 +8,4 @@ sudo nixos-rebuild switch
 # Prepare Home-manager
 home-manager init 
 cp -f ./nix/home.nix ~/.config/home-manager/home.nix
-home-manager switch
-
-reboot
+home-manager switch && reboot ##only reboot if switch return 0
