@@ -73,6 +73,7 @@ in
     bc
     jq
     gnutar
+    killall
     dmenu
     networkmanager_dmenu
     sshpass
@@ -81,6 +82,7 @@ in
 #    pulseaudio
     pavucontrol
     qjackctl
+
   ];
 
   #programs.home-manager.enable = true;
