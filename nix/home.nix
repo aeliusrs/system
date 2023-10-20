@@ -87,6 +87,9 @@ in
 
   programs.zsh = {
     enable = true;
+    initExtra = ''
+      unsetopt GLOBAL_RCS;
+    '';
   };
 
   programs.git = {
