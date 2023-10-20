@@ -131,7 +131,11 @@ in
   ## POLYBAR
   cp -rf ${repository}/dotfiles/polybar        ~/.config/polybar
 
-  chmod -R u+w ~/.config
+  chmod -Rv u+w ~/.config
+  chmod -Rv u+w ~/.tmux
+  chmod -Rv u+w ~/.ocha-zsh
+  chmod -Rv u+w ~/.zshrc
+  chmod -Rv u+w ~/.tmux.conf
   '';
 
   # ========================================================================= #
