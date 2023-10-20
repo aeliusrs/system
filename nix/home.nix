@@ -85,14 +85,9 @@ in
 
   ];
 
-  #programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
 
-  programs.zsh = {
-    enable = true;
-    initExtra = ''
-      unsetopt GLOBAL_RCS;
-    '';
-  };
+  programs.zsh.enable = true;
 
   programs.git = {
     enable = true;
