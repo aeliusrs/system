@@ -119,22 +119,22 @@ in
   chmod -Rv u+w ~/.scripts
 
   ## MIMEAPPS
-  cp -f ${repository}/dotfiles/mimeapps.list   ~/.config/mimeapps.list
+  cp -f ${repository}/dotfiles/mimeapps.list   ~/.config/
 
   ## ALACRITTY
-  cp -rf ${repository}/dotfiles/alacritty      ~/.config/alacritty
+  cp -rf ${repository}/dotfiles/alacritty      ~/.config/
 
   ## NVIM
-  cp -rf ${repository}/dotfiles/nvim           ~/.config/nvim
+  cp -rf ${repository}/dotfiles/nvim           ~/.config/
 
   ## OPENBOX
-  cp -rf ${repository}/dotfiles/openbox        ~/.config/openbox
+  cp -rf ${repository}/dotfiles/openbox        ~/.config/
 
   ## PICOM
-  cp -rf ${repository}/dotfiles/picom        ~/.config/picom
+  cp -rf ${repository}/dotfiles/picom        ~/.config/
 
   ## POLYBAR
-  cp -rf ${repository}/dotfiles/polybar        ~/.config/polybar
+  cp -rf ${repository}/dotfiles/polybar        ~/.config/
 
   chmod -Rv u+w ~/.config
   '';
@@ -145,7 +145,7 @@ in
 
   home.activation.setAssets = lib.hm.dag.entryAfter ["setDotfiles"] ''
     mkdir -p ~/.local/share/fonts
-    cp -ru ${repository}/assets/fonts      ~/.local/share/fonts || :
+    cp -ru ${repository}/assets/fonts      ~/.local/share/ || :
     cp -ru ${repository}/assets/icons      ~/.icons || :
     cp -ru ${repository}/assets/themes     ~/.themes || :
     chmod -R +w ~/.local/share/fonts || :
