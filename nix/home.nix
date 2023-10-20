@@ -118,6 +118,10 @@ in
   cp -rf ${repository}/dotfiles/scripts        ~/.scripts
   chmod -Rv u+w ~/.scripts
 
+  ## GTK2
+  cp -f ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
+  chmod -Rv u+w ~/.gtkrc-2.0
+
   ## MIMEAPPS
   cp -f ${repository}/dotfiles/mimeapps.list   ~/.config/
 
@@ -131,10 +135,13 @@ in
   cp -rf ${repository}/dotfiles/openbox        ~/.config/
 
   ## PICOM
-  cp -rf ${repository}/dotfiles/picom        ~/.config/
+  cp -rf ${repository}/dotfiles/picom          ~/.config/
 
   ## POLYBAR
   cp -rf ${repository}/dotfiles/polybar        ~/.config/
+
+  ## GTK3
+  cp -rf ${repository}/dotfiles/gtk-3.0        ~/.config/
 
   chmod -Rv u+w ~/.config
   '';
