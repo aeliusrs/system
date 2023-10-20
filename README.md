@@ -69,3 +69,7 @@ Win + shift + 1..7	// move wk to x
 Win + o				// go to wk left
 Win + p				// go to wk right
 ```
+## Post install Screenshot
+
+<div align="center" style="text-align:center">
+<img src="./docs/img/rice-screenshot.png" alt="window manager screenshot"></div>
