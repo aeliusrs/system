@@ -130,6 +130,8 @@ in
 
   ## POLYBAR
   cp -rf ${repository}/dotfiles/polybar        ~/.config/polybar
+
+  chmod -R u+w ~/.config
   '';
 
   # ========================================================================= #
