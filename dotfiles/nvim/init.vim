@@ -11,7 +11,7 @@ let g:impact_transbg=1
 
 "___________________________________"
 :syntax on
-:colorscheme codedark
+:colorscheme ocha-color
 "set termguicolors
 
 "___________________________________"
@@ -40,7 +40,7 @@ hi SpecialKey ctermfg=8
 
 "____________________________________"
 :syntax sync minlines=300
-:set synmaxcol=120
+:set synmaxcol=300
 :set regexpengine=1
 
 "____________________________________"
@@ -135,6 +135,19 @@ function! Python_config ()
 	:xnoremap <silent> <space> mZ:call CommentToggleHash()<CR>`Z
 endfunction
 
+function! Nix_config ()
+	set tabstop=2
+	set softtabstop=2
+	set expandtab
+	set shiftwidth=2
+	set ai
+	set cuc
+	set cul
+	syn match pythonBoolean "\(\W\|^\)\@<=self\(\.\)\@="
+	let python_highlight_all = 1
+	:xnoremap <silent> <space> mZ:call CommentToggleHash()<CR>`Z
+endfunction
+
 function! Ruby_config ()
 	set tabstop=2
 	set softtabstop=2
@@ -175,6 +188,15 @@ function! Kotlin_config ()
 	:xnoremap <silent> <space> mZ:call CommentToggle()<CR>`Z
 endfunction
 
+function! Golang_config ()
+	set cc=120
+	set tabstop=2
+	set softtabstop=2
+	set expandtab
+	set shiftwidth=2
+	:xnoremap <silent> <space> mZ:call CommentToggle()<CR>`Z
+endfunction
+
 function! Elixir_config ()
 	set cc=120
 	set tabstop=2
@@ -187,7 +209,10 @@ function! Elixir_config ()
 	:xnoremap <silent> <space> mZ:call CommentToggleHash()<CR>`Z
 endfunction
 
+autocmd BufRead,BufNewFile *.go set filetype=golang
 autocmd BufRead,BufNewFile *.tf set filetype=tf
+autocmd BufRead,BufNewFile *.nix set filetype=nix
+autocmd BufRead,BufNewFile *.hcl set filetype=hcl
 autocmd BufRead,BufNewFile *.j2 set filetype=jinja2
 autocmd BufRead,BufNewFile *.bu set filetype=butane
 autocmd BufRead,BufNewFile *.svelte set filetype=html
@@ -201,10 +226,12 @@ autocmd Filetype html exe Html_config()
 autocmd Filetype python exe Python_config()
 autocmd Filetype javascript exe Js_config()
 autocmd FileType ruby,erb,inky,inky-erb exe Ruby_config()
-autocmd FileType yaml,tf,jinja2,butane exe Yaml_config()
+autocmd FileType yaml,tf,hcl,jinja2,butane exe Yaml_config()
+autocmd FileType nix exe Nix_config()
 autocmd Filetype ocaml exe OCaml_config()
 autocmd Filetype elixir exe Elixir_config()
 autocmd Filetype kotlin exe Kotlin_config()
+autocmd Filetype golang exe Golang_config()
 
 
 let g:user_emmet_install_global = 0

@@ -6,7 +6,8 @@ in
 
   # Fetch Git repository
   home.activation.getRepository = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
-    ${pkgs.git}/bin/git -C ${builtins.toString repository} pull
+    PATH=$PATH:${lib.makeBinPath [ pkgs.git ]}
+    git -C ${builtins.toString repository} pull
   '';
 #    || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
 
@@ -100,72 +101,43 @@ in
   # ------------------------------------------------------------------------- #
   # Install Dotfiles
 
+  home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
   ## ZSH
-  home.file.".zshrc".source = "${repository}/dotfiles/zsh/zshrc";
-  home.file.".ocha-zsh" = {
-    source = "${repository}/dotfiles/zsh/ocha-zsh";
-    recursive = true;
-    force = true;
-  };
+  cp -f ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
+  cp -rf ${repository}/dotfiles/zsh/ocha-zsh   ~/.ocha-zsh
 
   ## TMUX
-  home.file.".tmux.conf".source = "${repository}/dotfiles/tmux/tmux.conf";
-  home.file.".tmux" = {
-    source = "${repository}/dotfiles/tmux/tmux";
-    recursive = true;
-    force = true;
-  };
-
-  ## MIMEAPPS
-  home.file.".config/mimeapps.list".source = "${repository}/dotfiles/mimeapps.list";
-
-  ## ALACRITTY
-  home.file.".config/alacritty" = {
-    source = "${repository}/dotfiles/alacritty";
-    recursive = true;
-    force = true;
-  };
-
-  ## NVIM
-  home.file.".config/nvim" = {
-    source = "${repository}/dotfiles/nvim";
-    recursive = true;
-    force = true;
-  };
+  cp -f ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
+  cp -rf ${repository}/dotfiles/tmux/tmux      ~/.tmux
 
   ## SCRIPTS
-  home.file.".scripts" = {
-    source = "${repository}/dotfiles/scripts";
-    recursive = true;
-    force = true;
-  };
+  cp -rf ${repository}/dotfiles/scripts        ~/.scripts
+
+  ## MIMEAPPS
+  cp -f ${repository}/dotfiles/mimeapps.list   ~/.config/mimeapps.list
+
+  ## ALACRITTY
+  cp -rf ${repository}/dotfiles/alacritty      ~/.config/alacritty
+
+  ## NVIM
+  cp -rf ${repository}/dotfiles/nvim           ~/.config/nvim
 
   ## OPENBOX
-  home.file.".config/openbox" = {
-    source = "${repository}/dotfiles/openbox";
-    recursive = true;
-    force = true;
-  };
+  cp -rf ${repository}/dotfiles/openbox        ~/.config/openbox
 
   ## PICOM
-  home.file.".config/picom" = {
-    source = "${repository}/dotfiles/picom";
-    recursive = true;
-    force = true;
-  };
+  cp -rf ${repository}/dotfiles/picom        ~/.config/picom
 
   ## POLYBAR
-  home.file.".config/polybar" = {
-    source = "${repository}/dotfiles/polybar";
-    recursive = true;
-    force = true;
-  };
+  cp -rf ${repository}/dotfiles/polybar        ~/.config/polybar
+  '';
 
   # ========================================================================= #
   # ------------------------------------------------------------------------- #
   # Install Assets
 
-  home.activation.setAssets = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.setAssets = lib.hm.dag.entryAfter ["setDotfiles"] ''
+    mkdir -p ~/.local/share/fonts
     cp -ru ${repository}/assets/fonts      ~/.local/share/fonts || :
     cp -ru ${repository}/assets/icons      ~/.icons || :
     cp -ru ${repository}/assets/themes     ~/.themes || :
@@ -175,9 +147,9 @@ in
   '';
 
   home.activation.nvimSetup = lib.hm.dag.entryAfter ["setAssets"] ''
-    PATH=$PATH:${lib.makeBinPath [ pkgs.git pkgs.python311 ]}
-    ${pkgs.neovim}/bin/nvim --headless +'PlugInstall' +qa || :
-    ${pkgs.neovim}/bin/nvim --headless +'UpdateRemotePlugins' +qa || :
+    PATH=$PATH:${lib.makeBinPath [ pkgs.neovim pkgs.git pkgs.python311 ]}
+    nvim --headless +'PlugInstall' +qa || :
+    nvim --headless +'UpdateRemotePlugins' +qa || :
   '';
 
 }
