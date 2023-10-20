@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  myuser = "oolong";
+in
 {
   imports =
     [
@@ -53,7 +56,7 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.oolong = {
+  users.users."${myuser}" = {
     isNormalUser = true;
     uid = 1000;
     extraGroups = [ "networkmanager" "wheel" ];
@@ -78,14 +81,19 @@
   python311
   ];
 
+  # Fix Shell for home-manager
+  environment.shellInit = ''
+    export  NIXPATH="/nix/var/nix/profiles/per-user/${myuser}/channels:nixos-config=/etc/nixos/configuration.nix"
+  '';
+
   # Path
   system.activationScripts.makeDir = with pkgs; lib.stringAfter [ "var" ] ''
     mkdir -p /opt
 
-    mkdir -p /home/oolong/Pictures /home/oolong/Videos /home/oolong/Music
-    mkdir -p /home/oolong/Desktop /home/oolong/Documents /home/oolong/Downloads 
-    mkdir -p /home/oolong/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/oolong
-    chown -R 1000:1000 /home/oolong
+    mkdir -p /home/${myuser}/Pictures /home/${myuser}/Videos /home/${myuser}/Music
+    mkdir -p /home/${myuser}/Desktop /home/${myuser}/Documents /home/${myuser}/Downloads 
+    mkdir -p /home/${myuser}/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/${myuser}
+    chown -R 1000:1000 /home/${myuser}
   '';
 
   # Enable the OpenSSH daemon.
