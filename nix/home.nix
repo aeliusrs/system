@@ -104,6 +104,9 @@ in
   # ------------------------------------------------------------------------- #
   # Install Dotfiles
 
+  # remove linking from HM to zshrc
+  home.file.".zshrc".enable = false;
+
   home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
   ## ZSH
   cp -f ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
