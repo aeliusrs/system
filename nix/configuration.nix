@@ -93,7 +93,7 @@ in
     mkdir -p /home/${myuser}/Pictures /home/${myuser}/Videos /home/${myuser}/Music
     mkdir -p /home/${myuser}/Desktop /home/${myuser}/Documents /home/${myuser}/Downloads 
     mkdir -p /home/${myuser}/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/${myuser}
-    chown -R 1000:1000 /home/${myuser}
+    chown -R 1000:users /home/${myuser}
   '';
 
   # Enable the OpenSSH daemon.
