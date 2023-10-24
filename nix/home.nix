@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 let
   repository = ~/.system;
+  myuser = "aeliusrs";
 in
 {
 
@@ -11,8 +12,8 @@ in
   '';
 #    || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
 
-  home.username = "oolong";
-  home.homeDirectory = "/home/oolong";
+  home.username = "${myuser}";
+  home.homeDirectory = "/home/${myuser}";
 
   home.keyboard = {
     layout = lib.mkForce "us";

@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  myuser = "oolong";
+  myuser = "aeliusrs";
 in
 {
   imports =
@@ -8,10 +8,14 @@ in
       ./hardware-configuration.nix
     ];
 
-  # Bootloader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.useOSProber = true;
+  # Bootloader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
 
   # Hostname
   networking.hostName = "koi"; # Define your hostname.
