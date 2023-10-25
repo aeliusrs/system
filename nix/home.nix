@@ -77,13 +77,16 @@ in
     dmenu
     networkmanagerapplet
     sshpass
+    yt-dlp
     pavucontrol
     qjackctl
     virt-manager
     vagrant
     blueman
     gparted
+    appimage-run # to run appimage
     python311Packages.pygobject3 # dmenu_network dep
+    youtube-music
   ];
 
   #programs.home-manager.enable = true;
@@ -108,18 +111,18 @@ in
   home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
   ## ZSH
   cp -f ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
-  cp -rf ${repository}/dotfiles/zsh/ocha-zsh   ~/.ocha-zsh
+  cp -rf ${repository}/dotfiles/zsh/ocha-zsh   ~/.ocha-zsh/
   chmod -Rv u+w ~/.ocha-zsh
   chmod -Rv u+w ~/.zshrc
 
   ## TMUX
   cp -f ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
-  cp -rf ${repository}/dotfiles/tmux/tmux      ~/.tmux
+  cp -rf ${repository}/dotfiles/tmux/tmux      ~/.tmux/
   chmod -Rv u+w ~/.tmux
   chmod -Rv u+w ~/.tmux.conf
 
   ## SCRIPTS
-  cp -rf ${repository}/dotfiles/scripts        ~/.scripts
+  cp -rf ${repository}/dotfiles/scripts        ~/.scripts/
   chmod -Rv u+w ~/.scripts
 
   ## GTK2
@@ -158,8 +161,8 @@ in
     mkdir -p ~/.local/share/fonts
     cp -u ${repository}/dotfiles/Xresources ~/.Xresources || :
     cp -ru ${repository}/assets/fonts       ~/.local/share/ || :
-    cp -ru ${repository}/assets/icons       ~/.icons || :
-    cp -ru ${repository}/assets/themes      ~/.themes || :
+    cp -ru ${repository}/assets/icons       ~/.icons/ || :
+    cp -ru ${repository}/assets/themes      ~/.themes/ || :
     chmod -R +w ~/.Xresources || :
     chmod -R +w ~/.local/share/fonts || :
     chmod -R +w ~/.icons || :
