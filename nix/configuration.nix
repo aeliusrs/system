@@ -12,6 +12,11 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # decrypt got a GUI
+  #boot.plymouth.enable = true;
+
+
+
   # Setup keyfile
   boot.initrd.secrets = {
     "/crypto_keyfile.bin" = null;
@@ -63,12 +68,16 @@ in
   users.users."${myuser}" = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ 
+      "networkmanager" 
+      "wheel" 
+      "video" 
+      "libvirtd" 
+    ];
     shell = pkgs.zsh;
-    packages = with pkgs; [ git ];
+    packages = with pkgs; [];
   };
 
-  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -83,7 +92,14 @@ in
   powertop
   sshpass
   python311
+  pipewire   # to manage sound
+  alsa-utils # to manage audio card
+  udisks     # to manage USB automount
+  light      # to manage brightness
+  libvirt    # to manage VM
+  qemu_full  # to have VM
   ];
+
 
   # Fix Shell for home-manager
   environment.shellInit = ''
@@ -109,6 +125,31 @@ in
     TCPKeepAlive = "no";
     MaxSessions = 2;
   };
+
+  # Activate pipewire
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+  # automount Device
+  services.udisks2.enable = true;
+
+  # activate libvirt
+  virtualisation.libvirtd.enable = true;
+
+  # activate zsh
+  programs.zsh.enable = true;
+
+  # activate light
+  programs.light.enable = true;
+
+  # activate bluetooth
+  hardware.bluetooth.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

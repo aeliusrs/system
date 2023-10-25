@@ -1,5 +1,0 @@
-#!/usr/bin/env zsh
-basedir="/sys/class/backlight/"
-handler=$basedir$(ls $basedir)"/"
-echo $handler
-chmod 666 $handler"brightness"

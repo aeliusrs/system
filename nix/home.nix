@@ -78,12 +78,10 @@ in
     dmenu
     networkmanager_dmenu
     sshpass
-    pipewire
-#    pipecontrol
-#    pulseaudio
     pavucontrol
     qjackctl
-
+    virt-manager
+    blueman
   ];
 
   #programs.home-manager.enable = true;
