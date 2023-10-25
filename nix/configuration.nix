@@ -13,7 +13,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   # decrypt got a GUI
-  #boot.plymouth.enable = true;
+  boot.plymouth.enable = true;
 
 
 
@@ -85,21 +85,23 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  home-manager
-  vim
-  wget
-  htop
-  powertop
-  sshpass
-  python311
-  pipewire   # to manage sound
-  alsa-utils # to manage audio card
-  udisks     # to manage USB automount
-  light      # to manage brightness
-  libvirt    # to manage VM
-  qemu_full  # to have VM
-  podman     # to have containers
-  podman-compose
+    vim
+    wget
+    htop
+    powertop
+    sshpass
+    python311
+    plymouth            # Flicker-free boot
+    nixos-bgrt-plymouth # nice theme for plymouth
+    home-manager        # a Nix Dotfiles manager
+    pipewire            # to manage sound
+    alsa-utils          # to manage audio card
+    udisks              # to manage USB automount
+    light               # to manage brightness
+    libvirt             # to manage VM
+    qemu_full           # to have VM
+    podman              # to have containers
+    podman-compose      # to do containers composition
   ];
 
 
@@ -141,7 +143,6 @@ in
   # automount Device
   services.udisks2.enable = true;
   services.gvfs.enable = true;
-  #services.devmon.enable = true;
 
   # activate libvirt
   virtualisation = {
