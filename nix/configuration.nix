@@ -140,6 +140,8 @@ in
 
   # automount Device
   services.udisks2.enable = true;
+  services.gvfs.enable = true;
+  #services.devmon.enable = true;
 
   # activate libvirt
   virtualisation = {
@@ -167,6 +169,7 @@ in
 
   # activate bluetooth
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

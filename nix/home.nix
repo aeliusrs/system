@@ -61,7 +61,6 @@ in
     lxappearance-gtk2
     i3lock
     polybar
-    mate.mate-polkit
     picom
     feh
     unifont
@@ -84,6 +83,7 @@ in
     vagrant
     blueman
     gparted
+    python311Packages.pygobject3 # dmenu_network dep
   ];
 
   #programs.home-manager.enable = true;
