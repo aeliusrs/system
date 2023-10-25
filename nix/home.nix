@@ -6,10 +6,10 @@ in
 {
 
   # Fetch Git repository
-  home.activation.getRepository = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
-    PATH=$PATH:${lib.makeBinPath [ pkgs.git ]}
-    git -C ${builtins.toString repository} pull
-  '';
+#  home.activation.getRepository = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
+#    PATH=$PATH:${lib.makeBinPath [ pkgs.git ]}
+#    git -C ${builtins.toString repository} pull
+#  '';
 #    || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
 
   home.username = "${myuser}";
@@ -76,12 +76,14 @@ in
     gnutar
     killall
     dmenu
-    networkmanager_dmenu
+    networkmanagerapplet
     sshpass
     pavucontrol
     qjackctl
     virt-manager
+    vagrant
     blueman
+    gparted
   ];
 
   #programs.home-manager.enable = true;
@@ -154,9 +156,11 @@ in
 
   home.activation.setAssets = lib.hm.dag.entryAfter ["setDotfiles"] ''
     mkdir -p ~/.local/share/fonts
-    cp -ru ${repository}/assets/fonts      ~/.local/share/ || :
-    cp -ru ${repository}/assets/icons      ~/.icons || :
-    cp -ru ${repository}/assets/themes     ~/.themes || :
+    cp -u ${repository}/dotfiles/Xresources ~/.Xresources || :
+    cp -ru ${repository}/assets/fonts       ~/.local/share/ || :
+    cp -ru ${repository}/assets/icons       ~/.icons || :
+    cp -ru ${repository}/assets/themes      ~/.themes || :
+    chmod -R +w ~/.Xresources || :
     chmod -R +w ~/.local/share/fonts || :
     chmod -R +w ~/.icons || :
     chmod -R +w ~/.themes || :

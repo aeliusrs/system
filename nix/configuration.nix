@@ -98,6 +98,8 @@ in
   light      # to manage brightness
   libvirt    # to manage VM
   qemu_full  # to have VM
+  podman     # to have containers
+  podman-compose
   ];
 
 
@@ -140,7 +142,22 @@ in
   services.udisks2.enable = true;
 
   # activate libvirt
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd = { 
+      enable = true;
+    };
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings = {
+        dns_enabled = true;
+      };
+    };
+  };
 
   # activate zsh
   programs.zsh.enable = true;
