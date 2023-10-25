@@ -12,10 +12,11 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # decrypt got a GUI
+  # Decrypt got a GUI
+  boot.initrd.systemd.enable = true; #authorize plymouth in stage 1
   boot.plymouth.enable = true;
-
-
+  boot.plymouth.theme = "breeze";
+  #boot.kernelParams = ["quiet"];
 
   # Setup keyfile
   boot.initrd.secrets = {
@@ -91,7 +92,6 @@ in
     powertop
     sshpass
     python311
-    plymouth            # Flicker-free boot
     nixos-bgrt-plymouth # nice theme for plymouth
     home-manager        # a Nix Dotfiles manager
     pipewire            # to manage sound

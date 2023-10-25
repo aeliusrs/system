@@ -46,6 +46,7 @@ in
     alacritty
     vlc
     brave
+    firefox
     zathura
     xclip
     xdotool
