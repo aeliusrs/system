@@ -109,6 +109,9 @@ in
     qemu_full           # to have VM
     podman              # to have containers
     podman-compose      # to do containers composition
+    pciutils            # lspci
+    usbutils            # lsusb
+    dnsutils            # nslookup
   ];
 
 
@@ -174,6 +177,9 @@ in
 
   # activate light
   programs.light.enable = true;
+
+  # activate zsh
+  programs.dconf.enable = true; #so virt-manager can remember stuff
 
   # activate bluetooth
   hardware.bluetooth.enable = true;
