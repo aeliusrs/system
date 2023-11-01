@@ -38,6 +38,10 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  networking.extraHosts = ''
+    172.16.200.126 registry.gitlab.app.n-hop.com
+  '';
+
   services.resolved.enable = true;
 
   # Set your time zone.
