@@ -144,10 +144,6 @@ in
     MaxSessions = 2;
   };
 
-  # add insecure registry
-  virtualisation.containers.registries.insecure = [
-    "registry.gitlab.app.n-hop.com"
-  ];
 
   # Activate pipewire
   security.rtkit.enable = true;
@@ -179,6 +175,9 @@ in
         dns_enabled = true;
       };
     };
+    containers.registries.insecure = [
+      "registry.gitlab.app.n-hop.com"
+    ];
   };
 
   # activate zsh
