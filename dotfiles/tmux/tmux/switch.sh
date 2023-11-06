@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 VAL=$(tmux show-options -w | grep 'synchronize-panes.*on')
 
