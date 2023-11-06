@@ -25,4 +25,4 @@ alias youtube-dl=yt-dlp
 
 [ -n "$SSH_CONNECTION" ] && unset SSH_ASKPASS
 export GIT_ASKPASS=
-if [ "$TMUX" = "" ]; then tmux new-session -s Dågenn; fi
+if [ "$TMUX" = "" ]; then tmux new-session -s Dågenn || tmux; fi
