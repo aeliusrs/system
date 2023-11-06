@@ -20,23 +20,9 @@ export PATH="$PATH:$HOME/.scripts:$HOME/.local/bin"
 
 alias youtube-dl=yt-dlp
 
-# Add RVM CONFIG
-#source $HOME/.rvm/scripts/rvm
-#export PATH="$PATH:$HOME/.rvm/bin"
-
-#export GEM_HOME=$HOME/.gem
-#export PATH="$GEM_HOME/ruby/2.5.0/bin:$PATH"
-#
 # Add OCAML CONFIG
 #eval $(opam env)
 
 [ -n "$SSH_CONNECTION" ] && unset SSH_ASKPASS
 export GIT_ASKPASS=
-if [ "$TMUX" = "" ]; then tmux; fi
-
-
-# if git make a repo slow add
-	# git config --add oh-my-zsh.hide-dirty 1
-	#
-
-### man fc !!!
+if [ "$TMUX" = "" ]; then tmux new-session -s Dågenn; fi
