@@ -17,10 +17,11 @@ in
 
   home.keyboard = {
     layout = lib.mkForce "us";
-    options = lib.mkForce [
-      "caps:swapcaps"
-      "compose:ralt"
-    ];
+   ### this does not work, rely on ~/.scripts/kb-layout
+   # options = lib.mkForce [
+   #   "caps:swapcaps"
+   #   "compose:ralt"
+   # ];
   };
 
   # This value determines the Home Manager release that your
@@ -36,7 +37,10 @@ in
   home.packages = with pkgs; [
     neovim
     zsh
+    ansible
+    terraform
     git
+    shellcheck
     openbox
     openbox-menu
     obconf
@@ -47,13 +51,15 @@ in
     vlc
     brave
     firefox
+    chromium
     zathura
     xclip
     xdotool
     wmctrl
     wmname
+    vimix-icon-theme
     imagemagick
-    gcolor3
+    gcolor2
     galculator
     viewnior
     transmission
@@ -88,6 +94,7 @@ in
     appimage-run # to run appimage
     python311Packages.pygobject3 # dmenu_network dep
     youtube-music
+    gnumake #to have make !
   ];
 
   #programs.home-manager.enable = true;

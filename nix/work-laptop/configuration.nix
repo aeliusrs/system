@@ -93,9 +93,14 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # activate man 3 pages
+  documentation.dev.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    man-pages 
+    man-pages-posix 
     vim
     wget
     htop
@@ -116,6 +121,7 @@ in
     pciutils            # lspci
     usbutils            # lsusb
     dnsutils            # nslookup
+    file
   ];
 
 
@@ -135,13 +141,18 @@ in
   '';
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.settings = {
-    ClientAliveCountMax = 1;
-    LogLevel = "VERBOSE";
-    MaxAuthTries = 3;
-    TCPKeepAlive = "no";
-    MaxSessions = 2;
+  services.openssh = {
+    enable = true;
+    settings = {
+      ClientAliveCountMax = 1;
+      LogLevel = "VERBOSE";
+      MaxAuthTries = 3;
+      TCPKeepAlive = "no";
+      MaxSessions = 2;
+    };
+#    extraConfig = ''
+#      CanonicalizeHostname yes
+#    '';
   };
 
 
@@ -177,6 +188,7 @@ in
     };
     containers.registries.insecure = [
       "registry.gitlab.app.n-hop.com"
+      "registry.bastion.n-hop.com"
     ];
   };
 
