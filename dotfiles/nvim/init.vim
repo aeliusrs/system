@@ -164,12 +164,12 @@ function! OCaml_config ()
 	set sw=2
 	set sta
 	set et
-	let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-	execute 'set rtp+=' . g:opamshare . '/merlin/vim'
-	execute 'runtime ' . g:opamshare . '/merlin/vim/plugin/**/*.vim'
-	" ocp-indent
-	execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
-	execute 'runtime ' . g:opamshare . '/ocp-indent/vim/plugin/**/*.vim'
+"	let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+"	execute 'set rtp+=' . g:opamshare . '/merlin/vim'
+"	execute 'runtime ' . g:opamshare . '/merlin/vim/plugin/**/*.vim'
+"	" ocp-indent
+"	execute 'set rtp^=' . g:opamshare . '/ocp-indent/vim'
+"	execute 'runtime ' . g:opamshare . '/ocp-indent/vim/plugin/**/*.vim'
 
 "	let g:neomake_c_enabled_makers=['merlin']
 	"autocmd BufWritePost *.ml execute MerlinErrorCheck | redraw!
