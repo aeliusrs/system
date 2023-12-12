@@ -37,10 +37,12 @@ in
   home.packages = with pkgs; [
     neovim
     zsh
+    fzf
     ansible
     terraform
     git
     shellcheck
+    btop
     openbox
     openbox-menu
     obconf
@@ -103,8 +105,11 @@ in
 
   programs.git = {
     enable = true;
-    userName = "oolong";
+    userName = "aeliusrs";
     userEmail = "asrs.contact+dev@gmail.com";
+    # extraConfig = {
+      # credential.helper = "store";
+    # };
   };
 
 
