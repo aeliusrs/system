@@ -122,6 +122,7 @@ in
     usbutils            # lsusb
     dnsutils            # nslookup
     file
+    direnv
   ];
 
 
