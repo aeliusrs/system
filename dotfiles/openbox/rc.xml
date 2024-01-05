@@ -35,7 +35,7 @@
     <primaryMonitor>Mouse</primaryMonitor>
   </placement>
   <theme>
-    <name>Zukitwo-ob-dark</name>
+    <name>Zukitwo-ob</name>
     <titleLayout>LIMC</titleLayout>
     <!--
 	  available characters are NDSLIMC, each can occur at most once.
