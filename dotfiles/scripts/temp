@@ -1,0 +1,5 @@
+# reset
+redshift -x
+
+# light color
+redshift -P -O 4000

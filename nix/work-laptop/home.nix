@@ -35,68 +35,70 @@ in
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
-    neovim
-    zsh
-    fzf
+    alacritty
     ansible
-    terraform
-    git
-    shellcheck
+    appimage-run # to run appimage
+    bc
+    blueman
+    brave
     btop
+    chromium
+    dmenu
+    feh
+    firefox
+    fzf
+    galculator
+    gcolor2
+    git
+    gnumake #to have make !
+    gnutar
+    gparted
+    i3lock
+    imagemagick
+    jq
+    killall
+    lxappearance-gtk2
+    lxde.lxrandr
+    mate.mate-polkit
+    mate.mate-utils
+    neovim
+    networkmanagerapplet
+    obconf
     openbox
     openbox-menu
-    obconf
+    pavucontrol
     pcmanfm
-    mate.mate-utils
-    mate.mate-polkit
-    alacritty
+    picom
+    polybar
+    python311Packages.pygobject3 # dmenu_network dep
+    qjackctl
+    redshift #change color3500
+    shellcheck
+    soundconverter
+    sshpass
+    terminus-nerdfont
+    terminus_font
+    terraform
+    tmux
+    transmission
+    unifont
+    unzip
+    vagrant
+    viewnior
+    vimix-icon-theme
+    virt-manager
+    virt-viewer
     vlc
-    brave
-    firefox
-    chromium
-    zathura
-    xclip
-    xdotool
+    wget
     wmctrl
     wmname
-    vimix-icon-theme
-    imagemagick
-    gcolor2
-    galculator
-    viewnior
-    transmission
-    soundconverter
-    lxde.lxrandr
-    lxappearance-gtk2
-    i3lock
-    polybar
-    picom
-    feh
-    unifont
-    terminus_font
-    terminus-nerdfont
-    tmux
-    zip
-    unzip
-    wget
-    bc
-    jq
-    gnutar
-    killall
-    dmenu
-    networkmanagerapplet
-    sshpass
-    yt-dlp
-    pavucontrol
-    qjackctl
-    virt-manager
-    vagrant
-    blueman
-    gparted
-    appimage-run # to run appimage
-    python311Packages.pygobject3 # dmenu_network dep
+    xclip
+    xdotool
     youtube-music
-    gnumake #to have make !
+    yt-dlp
+    zathura
+    zip
+    zsh
   ];
 
   #programs.home-manager.enable = true;
