@@ -194,6 +194,9 @@ function! Golang_config ()
 	set softtabstop=2
 	set expandtab
 	set shiftwidth=2
+"	syn match Keyword "func"
+"	syn match Keyword "return"
+"	syn match Keyword "package"
 	:xnoremap <silent> <space> mZ:call CommentToggle()<CR>`Z
 endfunction
 
@@ -209,7 +212,7 @@ function! Elixir_config ()
 	:xnoremap <silent> <space> mZ:call CommentToggleHash()<CR>`Z
 endfunction
 
-autocmd BufRead,BufNewFile *.go set filetype=golang
+autocmd BufRead,BufNewFile *.go set filetype=go
 autocmd BufRead,BufNewFile *.tf set filetype=tf
 autocmd BufRead,BufNewFile *.nix set filetype=nix
 autocmd BufRead,BufNewFile *.hcl set filetype=hcl
