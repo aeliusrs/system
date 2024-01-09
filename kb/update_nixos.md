@@ -1,4 +1,4 @@
-nix-channel --add https://nixos.org/channels/nixos-18.09 nixos
+nix-channel --add https://nixos.org/channels/nixos-23.11 nixos
 nix-channel --update
 
 As the root user, build your system:
