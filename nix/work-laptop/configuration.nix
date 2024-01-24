@@ -123,6 +123,8 @@ in
     dnsutils            # nslookup
     file
     direnv
+    via			# keyboard configurator
+#    vial		# keyboard configurator
   ];
 
 
@@ -213,6 +215,11 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
+
+  services.udev.packages = with pkgs; [
+    via
+    vial
+  ];
 
   nix.gc = {
     automatic = true;
