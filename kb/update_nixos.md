@@ -6,6 +6,9 @@ As the root user, build your system:
 # THIS ---
 nixos-rebuild --upgrade boot
 
+to execute the update on another machine to avoid resources constraint:
+nixos-rebuild --build-host user@address --upgrade boot
+
 # ---- ---
 Reboot to enter your newly-built NixOS.
 
