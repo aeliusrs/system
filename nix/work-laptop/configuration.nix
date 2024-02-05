@@ -124,7 +124,7 @@ in
     file
     direnv
     via			# keyboard configurator
-#    vial		# keyboard configurator
+    vial		# keyboard configurator
   ];
 
 
@@ -220,6 +220,9 @@ in
     via
     vial
   ];
+
+  # to let qmk access my non-root user
+  hardware.keyboard.qmk.enable = true;
 
   nix.gc = {
     automatic = true;
