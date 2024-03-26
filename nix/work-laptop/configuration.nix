@@ -34,13 +34,15 @@ in
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
+  networking.wireguard.enable = true;
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  networking.extraHosts = ''
-    172.16.200.126 registry.gitlab.app.n-hop.com
-  '';
+#  networking.extraHosts = ''
+#    192.168.3.150 bastion-dev.n-hop.com registry.bastion-dev.n-hop.com sources.bastion-dev.n-hop.com
+#  '';
 
   services.resolved.enable = true;
 
@@ -125,8 +127,14 @@ in
     direnv
     via			# keyboard configurator
     vial		# keyboard configurator
+    openssl		# to manipulate ssl
+  #  lldpd		# link layer discovery proto daemon 
+    wireguard-tools     # tools to use wireguard
+    wgcf                # Cloudflare warp tools to esc the gfw
+  # cloudflared
   ];
 
+  #services.lldpd.enable = true;
 
   # Fix Shell for home-manager
   environment.shellInit = ''
@@ -176,6 +184,7 @@ in
   # activate libvirt
   virtualisation = {
     libvirtd = { 
+      qemu.ovmf.packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
       enable = true;
     };
     podman = {
@@ -189,10 +198,7 @@ in
         dns_enabled = true;
       };
     };
-    containers.registries.insecure = [
-      "registry.gitlab.app.n-hop.com"
-      "registry.bastion.n-hop.com"
-    ];
+    containers.registries.insecure = [];
   };
 
   # activate zsh
