@@ -15,6 +15,8 @@ in
   home.username = "${myuser}";
   home.homeDirectory = "/home/${myuser}";
 
+  home.enableNixpkgsReleaseCheck = false;
+
   home.keyboard = {
     layout = lib.mkForce "us";
    ### this does not work, rely on ~/.scripts/kb-layout
@@ -32,7 +34,7 @@ in
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "23.05";
+  home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
     alacritty
@@ -99,7 +101,13 @@ in
     zathura
     zip
     zsh
+    sshfs
   ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
 
   #programs.home-manager.enable = true;
 
@@ -189,6 +197,5 @@ in
     nvim --headless +'PlugInstall' +qa || :
     nvim --headless +'UpdateRemotePlugins' +qa || :
   '';
-
 }
 
