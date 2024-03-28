@@ -35,7 +35,7 @@
     <primaryMonitor>Mouse</primaryMonitor>
   </placement>
   <theme>
-    <name>Zukitwo-ob</name>
+    <name>Zukitwo-ob-dark</name>
     <titleLayout>LIMC</titleLayout>
     <!--
 	  available characters are NDSLIMC, each can occur at most once.
@@ -374,12 +374,14 @@
     <!--             -->
     <keybind key="W-S-comma">
       <action name="Execute">
-        <command>zsh ~/.scripts/brigthness down</command>
+        <!-- <command>zsh ~/.scripts/brigthness down</command> -->
+        <command>zsh light -U 5</command>
       </action>
     </keybind>
     <keybind key="W-S-period">
       <action name="Execute">
-        <command>zsh ~/.scripts/brigthness up</command>
+        <!-- <command>zsh ~/.scripts/brigthness up</command> -->
+        <command>zsh light -A 5</command>
       </action>
     </keybind>
     <keybind key="W-comma">
