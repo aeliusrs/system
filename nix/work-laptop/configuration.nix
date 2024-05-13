@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let
-  myuser = "aeliusrs";
+   myuser = "aeliusrs";
+#   edk2-aarch64 = pkgs.callPackage "/etc/nixos/edk2-aarch64.nix" {};
 in
 {
   imports =
@@ -11,6 +12,23 @@ in
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
+  # To be able to cross compile to ARM
+
+# boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+#   nixpkgs.overlays = [ 
+#      (final: prev: {
+#        OVMF = prev.OVMF.overrideAttrs (oldAttrs: {
+#          postInstall = (oldAttrs.postInstall or "") + ''
+#            mkdir -vp $fd/FV
+#            cp -v ${edk2-aarch64}/aarch64/QEMU_CODE.fd $fd/FV/AAVMF_CODE.fd
+#            cp -v ${edk2-aarch64}/aarch64/QEMU_VARS.fd $fd/FV/AAVMF_VARS.fd
+#          '';
+#        });
+#      })
+#    ];
+
 
   # Decrypt got a GUI
   boot.initrd.systemd.enable = true; #authorize plymouth in stage 1
@@ -25,7 +43,7 @@ in
 
 
   # Hostname
-  networking.hostName = "koi"; # Define your hostname.
+  networking.hostName = "arrow"; # Define your hostname.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -106,9 +124,9 @@ in
     vim
     wget
     htop
-    powertop            # Intel Base power analyze
     sshpass
     python311
+    powertop            # Intel Base power analyze
     nixos-bgrt-plymouth # nice theme for plymouth 
     lightdm-gtk-greeter # nice theme for lightDM
     home-manager        # a Nix Dotfiles manager for users
@@ -128,13 +146,14 @@ in
     via			# keyboard configurator
     vial		# keyboard configurator
     openssl		# to manipulate ssl
-  #  lldpd		# link layer discovery proto daemon 
     wireguard-tools     # tools to use wireguard
-    wgcf                # Cloudflare warp tools to esc the gfw
-  # cloudflared
+    cloudflare-warp     # Cloudflare warp tools to esc the gfw
+  #  lldpd		# link layer discovery proto daemon 
   ];
 
   #services.lldpd.enable = true;
+  systemd.packages = with pkgs; [ cloudflare-warp ]; # for warp-cli
+  systemd.targets.multi-user.wants = [ "warp-svc.service" ];
 
   # Fix Shell for home-manager
   environment.shellInit = ''
@@ -184,8 +203,16 @@ in
   # activate libvirt
   virtualisation = {
     libvirtd = { 
-      qemu.ovmf.packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
       enable = true;
+      qemu = {
+       ovmf = {
+        enable = true;
+        #packages = [ 
+	#  pkgs.OVMF.fd 
+        #  pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd
+        #];
+        };
+      };
     };
     podman = {
       enable = true;
