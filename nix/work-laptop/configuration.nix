@@ -13,6 +13,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # To be able to cross compile to ARM
 
@@ -155,6 +156,10 @@ in
   systemd.packages = with pkgs; [ cloudflare-warp ]; # for warp-cli
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
 
+  # BPFTune
+  nixpkgs.overlays = [ (import ./bpftune-overlay.nix) ];
+  services.bpftune.enable = true;
+
   # Fix Shell for home-manager
   environment.shellInit = ''
     export  NIXPATH="/nix/var/nix/profiles/per-user/$USER/channels:nixos-config=/etc/nixos/configuration.nix"
@@ -207,10 +212,7 @@ in
       qemu = {
        ovmf = {
         enable = true;
-        #packages = [ 
-	#  pkgs.OVMF.fd 
-        #  pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd
-        #];
+	packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
         };
       };
     };
