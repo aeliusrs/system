@@ -1,6 +1,7 @@
 final: prev:
 {
  bpftune = prev.bpftune.overrideAttrs (old: {
+   version = "unstable-2024-05-17";
    src = prev.fetchFromGitHub {
      owner = "oracle";
      repo = "bpftune";

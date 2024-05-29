@@ -259,8 +259,12 @@ in
   # to let qmk access my non-root user
   hardware.keyboard.qmk.enable = true;
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+    };
   };
+
 }
