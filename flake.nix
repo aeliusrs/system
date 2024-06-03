@@ -10,7 +10,7 @@
       nixosConfigurations = {
 
         #WorkLaptop
-        work-laptop = nixpkgs.lib.nixosSystem {
+        arrow = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./nix/work-laptop/configuration.nix
