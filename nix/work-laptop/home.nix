@@ -132,48 +132,48 @@ in
   home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
   ## HOME-MANAGER
   mkdir -p ~/.config/home-manager
-  ln -s ${repository}/nix/work-laptop/home.nix ~/.config/home-manager/home.nix
+  ln -fs ${repository}/nix/work-laptop/home.nix ~/.config/home-manager/home.nix
 
   ## ZSH
-  ln -s ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
-  ln -s ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh/
+  ln -fs ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
+  ln -fs ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh/
   chmod -Rv u+w ~/.ocha-zsh
   chmod -Rv u+w ~/.zshrc
 
   ## TMUX
-  ln -s ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
-  ln -s ${repository}/dotfiles/tmux/tmux       ~/.tmux/
+  ln -fs ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
+  ln -fs ${repository}/dotfiles/tmux/tmux       ~/.tmux/
   chmod -Rv u+w ~/.tmux
   chmod -Rv u+w ~/.tmux.conf
 
   ## SCRIPTS
-  ln -s ${repository}/dotfiles/scripts         ~/.scripts/
+  ln -fs ${repository}/dotfiles/scripts         ~/.scripts/
   chmod -Rv u+w ~/.scripts
 
   ## GTK2
-  ln -s ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
+  ln -fs ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
   chmod -Rv u+w ~/.gtkrc-2.0
 
   ## MIMEAPPS
-  ln -s ${repository}/dotfiles/mimeapps.list   ~/.config/
+  ln -fs ${repository}/dotfiles/mimeapps.list   ~/.config/
 
   ## ALACRITTY
-  ln -s ${repository}/dotfiles/alacritty       ~/.config/
+  ln -fs ${repository}/dotfiles/alacritty       ~/.config/
 
   ## NVIM
-  ln -s ${repository}/dotfiles/nvim            ~/.config/
+  ln -fs ${repository}/dotfiles/nvim            ~/.config/
 
   ## OPENBOX
-  ln -s ${repository}/dotfiles/openbox         ~/.config/
+  ln -fs ${repository}/dotfiles/openbox         ~/.config/
 
   ## PICOM
-  ln -s ${repository}/dotfiles/picom           ~/.config/
+  ln -fs ${repository}/dotfiles/picom           ~/.config/
 
   ## POLYBAR
-  ln -s ${repository}/dotfiles/polybar         ~/.config/
+  ln -fs ${repository}/dotfiles/polybar         ~/.config/
 
   ## GTK3
-  ln -s ${repository}/dotfiles/gtk-3.0         ~/.config/
+  ln -fs ${repository}/dotfiles/gtk-3.0         ~/.config/
 
   chmod -Rv u+w ~/.config
   '';
