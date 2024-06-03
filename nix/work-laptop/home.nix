@@ -102,6 +102,7 @@ in
     zip
     zsh
     sshfs
+    bat
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
