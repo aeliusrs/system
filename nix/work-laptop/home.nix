@@ -136,18 +136,18 @@ in
 
   ## ZSH
   ln -fs ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
-  ln -fsT ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh/
+  ln -fsT ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh
   chmod -Rv u+w ~/.ocha-zsh || :
   chmod -Rv u+w ~/.zshrc || :
 
   ## TMUX
   ln -fs ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
-  ln -fsT ${repository}/dotfiles/tmux/tmux       ~/.tmux/
+  ln -fsT ${repository}/dotfiles/tmux/tmux       ~/.tmux
   chmod -Rv u+w ~/.tmux || :
   chmod -Rv u+w ~/.tmux.conf || :
 
   ## SCRIPTS
-  ln -fsT ${repository}/dotfiles/scripts         ~/.scripts/
+  ln -fsT ${repository}/dotfiles/scripts         ~/.scripts
   chmod -Rv u+w ~/.scripts || :
 
   ## GTK2
