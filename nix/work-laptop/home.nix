@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 let
-  repository = ~/.system;
   myuser = "aeliusrs";
+  repository = "/home/${myuser}/.system";
 in
 {
 
