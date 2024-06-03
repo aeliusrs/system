@@ -109,9 +109,6 @@ in
     "electron-25.9.0"
   ];
 
-
-  #programs.home-manager.enable = true;
-
   programs.zsh.enable = true;
 
   programs.git = {
@@ -133,46 +130,50 @@ in
   home.file.".zshrc".enable = false;
 
   home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  ## HOME-MANAGER
+  mkdir -p ~/.config/home-manager
+  ln -s ${repository}/nix/work-laptop/home.nix ~/.config/home-manager/home.nix
+
   ## ZSH
-  cp -f ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
-  cp -rf ${repository}/dotfiles/zsh/ocha-zsh   ~/.ocha-zsh/
+  ln -s ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
+  ln -s ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh/
   chmod -Rv u+w ~/.ocha-zsh
   chmod -Rv u+w ~/.zshrc
 
   ## TMUX
-  cp -f ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
-  cp -rf ${repository}/dotfiles/tmux/tmux      ~/.tmux/
+  ln -s ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
+  ln -s ${repository}/dotfiles/tmux/tmux       ~/.tmux/
   chmod -Rv u+w ~/.tmux
   chmod -Rv u+w ~/.tmux.conf
 
   ## SCRIPTS
-  cp -rf ${repository}/dotfiles/scripts        ~/.scripts/
+  ln -s ${repository}/dotfiles/scripts         ~/.scripts/
   chmod -Rv u+w ~/.scripts
 
   ## GTK2
-  cp -f ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
+  ln -s ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
   chmod -Rv u+w ~/.gtkrc-2.0
 
   ## MIMEAPPS
-  cp -f ${repository}/dotfiles/mimeapps.list   ~/.config/
+  ln -s ${repository}/dotfiles/mimeapps.list   ~/.config/
 
   ## ALACRITTY
-  cp -rf ${repository}/dotfiles/alacritty      ~/.config/
+  ln -s ${repository}/dotfiles/alacritty       ~/.config/
 
   ## NVIM
-  cp -rf ${repository}/dotfiles/nvim           ~/.config/
+  ln -s ${repository}/dotfiles/nvim            ~/.config/
 
   ## OPENBOX
-  cp -rf ${repository}/dotfiles/openbox        ~/.config/
+  ln -s ${repository}/dotfiles/openbox         ~/.config/
 
   ## PICOM
-  cp -rf ${repository}/dotfiles/picom          ~/.config/
+  ln -s ${repository}/dotfiles/picom           ~/.config/
 
   ## POLYBAR
-  cp -rf ${repository}/dotfiles/polybar        ~/.config/
+  ln -s ${repository}/dotfiles/polybar         ~/.config/
 
   ## GTK3
-  cp -rf ${repository}/dotfiles/gtk-3.0        ~/.config/
+  ln -s ${repository}/dotfiles/gtk-3.0         ~/.config/
 
   chmod -Rv u+w ~/.config
   '';

@@ -1,0 +1,19 @@
+[colors.primary]
+background = "0x181818"
+foreground = "0xe0e0e0"
+
+[font]
+size = 13.0
+
+[font.normal]
+family = "ProFontWindows"
+style = "Regular"
+
+[window]
+opacity = 0.98
+
+[window.padding]
+#decoration = "none"
+#dynamic_padding = true
+x = 25
+y = 25
