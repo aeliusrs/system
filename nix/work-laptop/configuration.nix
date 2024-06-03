@@ -4,8 +4,7 @@ let
 #   edk2-aarch64 = pkgs.callPackage "/etc/nixos/edk2-aarch64.nix" {};
 in
 {
-  imports =
-    [
+  imports = [
       ./hardware-configuration.nix
     ];
 
@@ -100,11 +99,11 @@ in
   users.users."${myuser}" = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ 
-      "networkmanager" 
-      "wheel" 
-      "video" 
-      "libvirtd" 
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "video"
+      "libvirtd"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [];
@@ -120,12 +119,14 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    man-pages 
-    man-pages-posix 
+    man-pages
+    man-pages-posix
     vim
     wget
     htop
     sshpass
+    file
+    direnv
     python311
     powertop            # Intel Base power analyze
     nixos-bgrt-plymouth # nice theme for plymouth 
@@ -142,17 +143,18 @@ in
     pciutils            # lspci
     usbutils            # lsusb
     dnsutils            # nslookup
-    file
-    direnv
-    via			# keyboard configurator
-    vial		# keyboard configurator
-    openssl		# to manipulate ssl
+    via                 # keyboard configurator
+    vial                # keyboard configurator
+    openssl             # to manipulate ssl
     wireguard-tools     # tools to use wireguard
     cloudflare-warp     # Cloudflare warp tools to esc the gfw
   #  lldpd		# link layer discovery proto daemon 
   ];
 
+  # LLPD
   #services.lldpd.enable = true;
+
+  # Cloudflare
   systemd.packages = with pkgs; [ cloudflare-warp ]; # for warp-cli
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
 
@@ -170,7 +172,7 @@ in
     mkdir -p /opt
 
     mkdir -p /home/${myuser}/Pictures /home/${myuser}/Videos /home/${myuser}/Music
-    mkdir -p /home/${myuser}/Desktop /home/${myuser}/Documents /home/${myuser}/Downloads 
+    mkdir -p /home/${myuser}/Desktop /home/${myuser}/Documents /home/${myuser}/Downloads
     mkdir -p /home/${myuser}/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/${myuser}
     chown -R 1000:users /home/${myuser}
   '';
@@ -267,5 +269,4 @@ in
       dates = "weekly";
     };
   };
-
 }
