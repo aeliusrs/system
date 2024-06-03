@@ -136,23 +136,23 @@ in
 
   ## ZSH
   ln -fs ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
-  ln -fs ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh/
-  chmod -Rv u+w ~/.ocha-zsh
-  chmod -Rv u+w ~/.zshrc
+  ln -fsT ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh/
+  chmod -Rv u+w ~/.ocha-zsh || :
+  chmod -Rv u+w ~/.zshrc || :
 
   ## TMUX
   ln -fs ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
-  ln -fs ${repository}/dotfiles/tmux/tmux       ~/.tmux/
-  chmod -Rv u+w ~/.tmux
-  chmod -Rv u+w ~/.tmux.conf
+  ln -fsT ${repository}/dotfiles/tmux/tmux       ~/.tmux/
+  chmod -Rv u+w ~/.tmux || :
+  chmod -Rv u+w ~/.tmux.conf || :
 
   ## SCRIPTS
-  ln -fs ${repository}/dotfiles/scripts         ~/.scripts/
-  chmod -Rv u+w ~/.scripts
+  ln -fsT ${repository}/dotfiles/scripts         ~/.scripts/
+  chmod -Rv u+w ~/.scripts || :
 
   ## GTK2
   ln -fs ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
-  chmod -Rv u+w ~/.gtkrc-2.0
+  chmod -Rv u+w ~/.gtkrc-2.0 || :
 
   ## MIMEAPPS
   ln -fs ${repository}/dotfiles/mimeapps.list   ~/.config/
@@ -175,7 +175,7 @@ in
   ## GTK3
   ln -fs ${repository}/dotfiles/gtk-3.0         ~/.config/
 
-  chmod -Rv u+w ~/.config
+  chmod -Rv u+w ~/.config || :
   '';
 
   # ========================================================================= #
