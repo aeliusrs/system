@@ -264,7 +264,7 @@ in
   nix = {
     settings.experimental-features = [ "nix-command" "flakes" ];
     settings.auto-optimise-store = true;
-    package = pkgs.nixVersions.latest;
+#    package = pkgs.nixVersions.latest;
     gc = {
       automatic = true;
       dates = "weekly";
