@@ -404,7 +404,7 @@
     </keybind>
     <keybind key="W-S-p">
       <action name="Execute">
-        <command>mate-screenshot</command>
+        <command>mate-screenshot -i</command>
       </action>
     </keybind>
   </keyboard>
