@@ -11,9 +11,9 @@ style = "Regular"
 
 [window]
 opacity = 0.98
+decorations = "None"
+dynamic_padding = true
 
 [window.padding]
-#decoration = "none"
-#dynamic_padding = true
 x = 25
 y = 25
