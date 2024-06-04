@@ -80,7 +80,8 @@ in
     sshpass
     terminus-nerdfont
     terminus_font
-    terraform
+    #terraform # Deprecated
+    opentofu
     tmux
     transmission
     unifont
