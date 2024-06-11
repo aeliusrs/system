@@ -155,11 +155,11 @@ in
   #services.lldpd.enable = true;
 
   # Cloudflare
-  systemd.packages = with pkgs; [ cloudflare-warp ]; # for warp-cli
-  systemd.targets.multi-user.wants = [ "warp-svc.service" ];
+  #systemd.packages = with pkgs; [ cloudflare-warp ]; # for warp-cli
+  #systemd.targets.multi-user.wants = [ "warp-svc.service" ];
+  nixpkgs.overlays = [ (import ./warp-overlay.nix) ];
 
   # BPFTune
-  nixpkgs.overlays = [ (import ./bpftune-overlay.nix) ];
   services.bpftune.enable = true;
 
   # Fix Shell for home-manager
