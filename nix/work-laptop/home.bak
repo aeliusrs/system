@@ -126,33 +126,33 @@ in
   # ------------------------------------------------------------------------- #
   # Install Dotfiles
 
-  #home.file.".zshrc".enable = false; # remove zshrc linking from HM
-
-  home.file.".config/home-manager/home.nix".source = ./home.nix;
-
-  home.file.".zshrc".source = ../../dotfiles/zsh/zshrc;
-  home.file.".ocha-zsh" = {
-    source = ../../dotfiles/zsh/ocha-zsh;
-    recursive = true;
-    executable = true;
-  };
-
-  home.file.".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
-  home.file.".tmux" = {
-    source = ../../dotfiles/tmux/tmux;
-    recursive = true;
-    executable = true;
-  };
+  # remove linking from HM to zshrc
+  home.file.".zshrc".enable = false;
 
   home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
   ## HOME-MANAGER
   mkdir -p ~/.config/home-manager
+  ln -fs ${repository}/nix/work-laptop/home.nix ~/.config/home-manager/home.nix
+
+  ## ZSH
+  ln -fs ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
+  ln -fsT ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh
+  chmod -Rv u+w ~/.ocha-zsh || :
+  chmod -Rv u+w ~/.zshrc || :
+
+  ## TMUX
+  ln -fs ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
+  ln -fsT ${repository}/dotfiles/tmux/tmux       ~/.tmux
+  chmod -Rv u+w ~/.tmux || :
+  chmod -Rv u+w ~/.tmux.conf || :
 
   ## SCRIPTS
   ln -fsT ${repository}/dotfiles/scripts         ~/.scripts
+  chmod -Rv u+w ~/.scripts || :
 
   ## GTK2
   ln -fs ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
+  chmod -Rv u+w ~/.gtkrc-2.0 || :
 
   ## MIMEAPPS
   ln -fs ${repository}/dotfiles/mimeapps.list   ~/.config/
@@ -174,6 +174,8 @@ in
 
   ## GTK3
   ln -fs ${repository}/dotfiles/gtk-3.0         ~/.config/
+
+  chmod -Rv u+w ~/.config || :
   '';
 
   # ========================================================================= #
@@ -186,6 +188,10 @@ in
     cp -ru ${repository}/assets/fonts       ~/.local/share/ || :
     cp -ru ${repository}/assets/icons       ~/.icons/ || :
     cp -ru ${repository}/assets/themes      ~/.themes/ || :
+    chmod -R +w ~/.Xresources || :
+    chmod -R +w ~/.local/share/fonts || :
+    chmod -R +w ~/.icons || :
+    chmod -R +w ~/.themes || :
   '';
 
   home.activation.nvimSetup = lib.hm.dag.entryAfter ["setAssets"] ''
