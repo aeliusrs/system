@@ -126,27 +126,25 @@ in
   # ------------------------------------------------------------------------- #
   # Install Dotfiles
 
-  #home.file.".zshrc".enable = false; # remove zshrc linking from HM
-
-  home.file.".config/home-manager/home.nix".source = ./home.nix;
-
-  home.file.".zshrc".source = ../../dotfiles/zsh/zshrc;
-  home.file.".ocha-zsh" = {
-    source = ../../dotfiles/zsh/ocha-zsh;
-    recursive = true;
-    executable = true;
-  };
-
-  home.file.".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
-  home.file.".tmux" = {
-    source = ../../dotfiles/tmux/tmux;
-    recursive = true;
-    executable = true;
-  };
+  home.file.".zshrc".enable = false; # remove zshrc linking from HM
 
   home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
   ## HOME-MANAGER
   mkdir -p ~/.config/home-manager
+  ln -fs ${repository}/nix/work-laptop/home.nix ~/.config/home-manager/home.nix
+
+  ## ZSH
+  ln -fs ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
+  ln -fsT ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh
+  chmod -Rv u+w ~/.ocha-zsh || :
+  chmod -Rv u+w ~/.zshrc || :
+
+  ## TMUX
+  ln -fs ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
+  ln -fsT ${repository}/dotfiles/tmux/tmux       ~/.tmux
+  chmod -Rv u+w ~/.tmux || :
+  chmod -Rv u+w ~/.tmux.conf || :
+
 
   ## SCRIPTS
   ln -fsT ${repository}/dotfiles/scripts         ~/.scripts
