@@ -103,6 +103,8 @@ in
     zip
     zsh
     sshfs
+    yazi
+    ueberzugpp
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
