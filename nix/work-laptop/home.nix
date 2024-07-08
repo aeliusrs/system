@@ -77,7 +77,6 @@ in
     redshift #change color3500
     shellcheck
     soundconverter
-    sshpass
     terminus-nerdfont
     terminus_font
     #terraform # Deprecated
@@ -121,6 +120,7 @@ in
       # credential.helper = "store";
     # };
   };
+
 
 
 

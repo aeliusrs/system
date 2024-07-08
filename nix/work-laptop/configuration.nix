@@ -8,6 +8,8 @@ in
       ./hardware-configuration.nix
     ];
 
+  system.stateVersion = "24.05";
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -125,6 +127,7 @@ in
     wget
     htop
     sshpass
+    ssh-agents
     file
     direnv
     python311
@@ -236,6 +239,9 @@ in
   # activate zsh
   programs.zsh.enable = true;
 
+  # start ssh agents accross terms
+  programs.ssh.startAgent = true;
+
   # activate light
   programs.light.enable = true;
 
@@ -246,13 +252,6 @@ in
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
 
   services.udev.packages = with pkgs; [
     via
@@ -263,12 +262,38 @@ in
   hardware.keyboard.qmk.enable = true;
 
   nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
-    settings.auto-optimise-store = true;
-#    package = pkgs.nixVersions.latest;
+    package = pkgs.nixVersions.latest;
+
     gc = {
       automatic = true;
       dates = "weekly";
+#      options = "--delete-older-than 7d";
+    };
+
+    settings = {
+      warn-dirty = false;
+      auto-optimise-store = true;
+      auto-allocate-uids = true;
+      use-cgroups = true;
+      # max-jobs = 8; # limit the number of parallel jobs
+      # flake-registry = ""; # disable global registry
+
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
+
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        # Allows Nix to automatically pick UIDs for builds, rather than creating nixbld* user accounts
+        "auto-allocate-uids"
+
+        # Allows Nix to execute builds inside cgroups
+        "cgroups"
+        # "configurable-impure-env" 
+        # "ca-derivations" 
+      ];
     };
   };
 }
