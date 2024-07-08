@@ -138,6 +138,7 @@ in
     udisks              # to manage USB automount
     libvirt             # to manage VM
     qemu_full           # to have VM
+    guestfs-tools       # to have better integration with vagrant
     podman              # to have containers
     podman-compose      # to do containers composition
     pciutils            # lspci
