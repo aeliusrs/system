@@ -26,6 +26,7 @@ x-scheme-handler/https=brave-browser.desktop
 x-scheme-handler/about=brave-browser.desktop
 x-scheme-handler/unknown=brave-browser.desktop
 image/avif=viewnior.desktop
+x-scheme-handler/mailto=brave-browser.desktop
 
 [Added Associations]
 application/pdf=org.pwmt.zathura.desktop;
