@@ -132,7 +132,7 @@ in
     direnv
     python311
     powertop            # Intel Base power analyze
-    nixos-bgrt-plymouth # nice theme for plymouth 
+    nixos-bgrt-plymouth # nice theme for plymouth
     lightdm-gtk-greeter # nice theme for lightDM
     home-manager        # a Nix Dotfiles manager for users
     light               # to manage brightness

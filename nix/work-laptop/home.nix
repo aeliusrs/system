@@ -37,6 +37,7 @@ in
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
+    #terraform # Deprecated
     alacritty
     ansible
     appimage-run # to run appimage
@@ -68,6 +69,7 @@ in
     obconf
     openbox
     openbox-menu
+    opentofu
     pavucontrol
     pcmanfm
     picom
@@ -77,12 +79,12 @@ in
     redshift #change color3500
     shellcheck
     soundconverter
+    sshfs
     terminus-nerdfont
     terminus_font
-    #terraform # Deprecated
-    opentofu
     tmux
     transmission
+    ueberzugpp
     unifont
     unzip
     vagrant
@@ -91,19 +93,18 @@ in
     virt-manager
     virt-viewer
     vlc
+    vscodium
     wget
     wmctrl
     wmname
     xclip
     xdotool
+    yazi
     youtube-music
     yt-dlp
     zathura
     zip
     zsh
-    sshfs
-    yazi
-    ueberzugpp
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
