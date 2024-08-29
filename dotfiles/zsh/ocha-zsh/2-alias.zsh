@@ -25,6 +25,8 @@ alias lt='tree | less'
 alias lla='ls -lh -a'
 alias lll='ls -lh | less'
 
+alias code='codium'
+
 alias grep='grep --color=tty'
 
 alias gcw='gcc -Wall -Werror -Wextra'
