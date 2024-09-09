@@ -152,6 +152,7 @@ in
     openssl             # to manipulate ssl
     wireguard-tools     # tools to use wireguard
     cloudflare-warp     # Cloudflare warp tools to esc the gfw
+    #gparted             # Partition tool
   #  lldpd		# link layer discovery proto daemon 
   ];
 
