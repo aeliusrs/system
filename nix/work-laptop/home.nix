@@ -115,8 +115,10 @@ in
 
   programs.git = {
     enable = true;
-    userName = "aeliusrs";
-    userEmail = "asrs.contact+dev@gmail.com";
+    # userName = "aeliusrs";
+    # userEmail = "asrs.contact+dev@gmail.com";
+    userName = "clement.richard";
+    userEmail = "clement.richard@n-hop.com";
     # extraConfig = {
       # credential.helper = "store";
     # };
