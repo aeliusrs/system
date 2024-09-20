@@ -37,7 +37,6 @@ in
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    #terraform # Deprecated
     alacritty
     ansible
     appimage-run # to run appimage

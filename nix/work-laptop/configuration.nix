@@ -153,8 +153,8 @@ in
     openssl             # to manipulate ssl
     wireguard-tools     # tools to use wireguard
     cloudflare-warp     # Cloudflare warp tools to esc the gfw
-    #gparted             # Partition tool
-  #  lldpd		# link layer discovery proto daemon 
+    #gparted            # Partition tool
+    #lldpd              # link layer discovery proto daemon 
   ];
 
   # LLPD
@@ -163,6 +163,7 @@ in
   # Cloudflare
   systemd.packages = with pkgs; [ cloudflare-warp ]; # for warp-cli
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
+
   nixpkgs.overlays = [ (import ./warp-overlay.nix) ];
 
   # BPFTune
@@ -220,7 +221,7 @@ in
       qemu = {
        ovmf = {
         enable = true;
-	packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
+        packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
         };
       };
     };
@@ -244,7 +245,7 @@ in
   # start ssh agents accross terms
   programs.ssh.startAgent = true;
 
-  # activate light
+  # activate light to manage brightness
   programs.light.enable = true;
 
   # activate zsh
