@@ -50,10 +50,16 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+
   # networking.wireless.enable = true; 
   networking.firewall.enable = true;
+  networking.nftables.enable = true;
+
   # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ 67 68 ];
+
+  # Add Libvirt and Podman interface to trustedInterfaces
+  networking.firewall.trustedInterfaces = [ "virbr*" "podman*" ];
 
   networking.wireguard.enable = true;
 
@@ -216,7 +222,7 @@ in
 
   # activate libvirt
   virtualisation = {
-    libvirtd = { 
+    libvirtd = {
       enable = true;
       qemu = {
        ovmf = {

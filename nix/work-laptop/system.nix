@@ -34,9 +34,6 @@
   # Enable firmware-linux-nonfree
   hardware.enableRedistributableFirmware = lib.mkDefault true;
 
-  # Enable nftables-based firewall
-  networking.nftables.enable = lib.mkDefault true;
-
   services = {
     cron.enable = true;
 
