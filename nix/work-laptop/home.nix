@@ -83,6 +83,7 @@ in
     terminus_font
     tmux
     transmission
+    transmission-gtk
     ueberzugpp
     unifont
     unzip
