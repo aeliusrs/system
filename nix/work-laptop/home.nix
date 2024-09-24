@@ -82,7 +82,6 @@ in
     terminus-nerdfont
     terminus_font
     tmux
-    transmission
     transmission-gtk
     ueberzugpp
     unifont
