@@ -161,6 +161,7 @@ in
     cloudflare-warp     # Cloudflare warp tools to esc the gfw
     polkit              # Policy engine for unprivileged process
     gparted             # Partition tool
+    mosh                # Nice ssh
     #lldpd              # link layer discovery proto daemon 
   ];
 

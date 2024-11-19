@@ -73,7 +73,7 @@ in
     pcmanfm
     picom
     polybar
-    python311Packages.pygobject3 # dmenu_network dep
+    python312Packages.pygobject3 # dmenu_network dep
     qjackctl
     redshift #change color3500
     shellcheck
