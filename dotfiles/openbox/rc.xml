@@ -375,13 +375,13 @@
     <keybind key="W-S-comma">
       <action name="Execute">
         <!-- <command>zsh ~/.scripts/brigthness down</command> -->
-		<command>/usr/bin/env light -U 5</command>
+        <command>/usr/bin/env light -U 5</command>
       </action>
     </keybind>
     <keybind key="W-S-period">
       <action name="Execute">
         <!-- <command>zsh ~/.scripts/brigthness up</command> -->
-		<command>/usr/bin/env light -A 5</command>
+        <command>/usr/bin/env light -A 5</command>
       </action>
     </keybind>
     <keybind key="W-comma">
@@ -717,6 +717,9 @@
   <applications>
     <application name="*">
       <decor>yes</decor>
+    </application>
+    <application name="brave-browser">
+      <decor>no</decor>
     </application>
     <application name="lxterminal">
       <position force="yes">
