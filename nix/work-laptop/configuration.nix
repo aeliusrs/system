@@ -59,7 +59,7 @@ in
   # networking.firewall.allowedUDPPorts = [ 67 68 ];
 
   # Add Libvirt and Podman interface to trustedInterfaces
-  networking.firewall.trustedInterfaces = [ "virbr*" "podman*" "tailscale*" ];
+  networking.firewall.trustedInterfaces = [ "virbr*" "podman*" "docker*" "tailscale*" ];
 
   networking.wireguard.enable = true;
 
@@ -113,6 +113,7 @@ in
       "wheel"
       "video"
       "libvirtd"
+      "docker"
     ];
     shell = pkgs.zsh;
     packages = with pkgs; [];
@@ -149,8 +150,11 @@ in
     libvirt             # to manage VM
     qemu_full           # to have VM
     guestfs-tools       # to have better integration with vagrant
-    podman              # to have containers
-    podman-compose      # to do containers composition
+    docker              # to have old school containers
+    docker-compose      # to have containers composition
+    docui               # a docker TUI interface
+    #podman              # to have containers
+    #podman-compose      # to do containers composition
     pciutils            # lspci
     usbutils            # lsusb
     dnsutils            # nslookup
@@ -234,11 +238,14 @@ in
         };
       };
     };
+    docker = {
+      enable = true; 
+    };
     podman = {
       enable = true;
 
       # Create a `docker` alias for podman, to use it as a drop-in replacement
-      dockerCompat = true;
+      #dockerCompat = true;
 
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings = {
