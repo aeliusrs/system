@@ -59,7 +59,7 @@ in
   # networking.firewall.allowedUDPPorts = [ 67 68 ];
 
   # Add Libvirt and Podman interface to trustedInterfaces
-  networking.firewall.trustedInterfaces = [ "virbr*" "podman*" ];
+  networking.firewall.trustedInterfaces = [ "virbr*" "podman*" "tailscale*" ];
 
   networking.wireguard.enable = true;
 
@@ -163,6 +163,7 @@ in
     gparted             # Partition tool
     mosh                # Nice ssh
     #lldpd              # link layer discovery proto daemon 
+    tailscale           # tailscale client
   ];
 
   # LLPD
@@ -307,4 +308,48 @@ in
       ];
     };
   };
+
+  services = {
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+      openFirewall = true;
+      interfaceName = "tailscale0";
+#      extraUpFlags =
+#        [
+#        "--reset"
+#        "--accept-routes=true"
+#        "--accept-dns=true"
+#        "--login-server=https://headscale.mehrdad.cc"
+#        "--auth-key=${cfg.authKey}"
+#        ];
+    };
+
+#  systemd.services = {
+## Workaround for slow switch due to wait-online
+## Issue: https://github.com/NixOS/nixpkgs/issues/180175
+#    NetworkManager-wait-online.enable = lib.mkForce false;
+#    systemd-networkd-wait-online.enable = lib.mkForce false;
+## The authkey does not work with the default tailscale package
+#    tailscaled-autoconnect = lib.mkIf (config.services.tailscale.extraUpFlags != null) {
+#      after = [ "tailscaled.service" ];
+#      wants = [ "tailscaled.service" ];
+#      wantedBy = [ "multi-user.target" ];
+#      serviceConfig = {
+#        Type = "oneshot";
+#      };
+#      script = ''
+#        status=$(${config.systemd.package}/bin/systemctl show -P StatusText tailscaled.service)
+#        if [[ $status != Connected* ]]; then
+#          ${config.services.tailscale.package}/bin/tailscale up ${lib.escapeShellArgs config.services.tailscale.extraUpFlags}
+#      fi
+#        '';
+#    };
+  };
+
+  networking.firewall = {
+    checkReversePath = "loose";
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
+
 }
