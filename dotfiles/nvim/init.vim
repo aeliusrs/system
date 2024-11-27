@@ -298,6 +298,14 @@ let g:BASH_Ctrl_s = 'off'
 :vnoremap <C-k> :m'>+1<CR>gv=gv
 :vnoremap <C-j> :m'<-2<CR>gv=gv
 
+"_ to fix home and end key in nvim
+:map <esc>OH <home>
+:cmap <esc>OH <home>
+:imap <esc>OH <home>
+:map <esc>OF <end>
+:cmap <esc>OF <end>
+:imap <esc>OF <end>
+
 "____________________________________"
 "
 " Use I to enter in insert at the begining of the line

@@ -20,8 +20,10 @@ autoload -Uz edit-command-line
 bindkey -M vicmd 'v' edit-command-line
 
 # allow ctrl-p, ctrl-n for navigate history (standard behaviour)
-bindkey '^P' up-history
-bindkey '^N' down-history
+#bindkey '^P' up-history
+#bindkey '^N' down-history
+bindkey '^N' history-incremental-search-backward
+bindkey '^P' history-incremental-search-forward
 
 # allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
 bindkey '^?' backward-delete-char
@@ -34,6 +36,10 @@ bindkey '^r' history-incremental-search-backward
 # allow ctrl-a and ctrl-e to move to beginning/end of line
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
+
+# allow home and end keys to move to beginning/end of line
+bindkey  '^[[1~' beginning-of-line
+bindkey  '^[[6~' end-of-line
 
 # allow alt+delete
 bindkey '^[^?' backward-kill-word
