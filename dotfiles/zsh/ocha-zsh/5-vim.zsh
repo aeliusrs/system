@@ -39,7 +39,7 @@ bindkey '^e' end-of-line
 
 # allow home and end keys to move to beginning/end of line
 bindkey  '^[[1~' beginning-of-line
-bindkey  '^[[6~' end-of-line
+bindkey  '^[[4~' end-of-line
 
 # allow alt+delete
 bindkey '^[^?' backward-kill-word
