@@ -1,7 +1,8 @@
 # 1-options.zsh
 autoload -Uz colors && colors
 autoload -U vcs_info && vcs_info
-autoload -Uz compinit -i && compinit
+#autoload -Uz compinit -i && compinit
+autoload -Uz compinit -i; compinit
 autoload -U zmv
 
 export LSCOLOR="Gxfxcxdxbxegedabagacad"
