@@ -136,6 +136,9 @@ in
     htop
     sshpass
     ssh-agents
+    ssh-to-age
+    age
+    sops
     file
     direnv
     python311
