@@ -312,6 +312,11 @@
         <command>zsh ~/.scripts/dmenu_script/dmenu_switcher</command>
       </action>
     </keybind>
+    <keybind key="W-S-z">
+      <action name="Execute">
+        <command>zsh ~/.scripts/hdmi_layout</command>
+      </action>
+    </keybind>
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
