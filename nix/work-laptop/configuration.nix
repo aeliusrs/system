@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, flake, ... }:
 let
    myuser = "aeliusrs";
 #   edk2-aarch64 = pkgs.callPackage "/etc/nixos/edk2-aarch64.nix" {};
@@ -74,9 +74,9 @@ in
   services.resolved.enable = true;
 
   # Set your time zone.
+# Select internationalisation properties.
   time.timeZone = "Asia/Hong_Kong";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -136,9 +136,10 @@ in
     htop
     sshpass
     ssh-agents
-    ssh-to-age
-    age
-    sops
+    ssh-to-age          # Converter sshkey to age key
+    age                 # A mozilla based encryption keys
+    sops                # A secret manager
+    yq                  # a jq for yaml
     file
     direnv
     python311
