@@ -78,4 +78,3 @@
     memoryPercent = 50;
   };
 }
- 

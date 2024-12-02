@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   myuser = "aeliusrs";
   repository = "/home/${myuser}/.system";
@@ -6,11 +11,11 @@ in
 {
 
   # Fetch Git repository
-#  home.activation.getRepository = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
-#    PATH=$PATH:${lib.makeBinPath [ pkgs.git ]}
-#    git -C ${builtins.toString repository} pull
-#  '';
-#    || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
+  #  home.activation.getRepository = lib.hm.dag.entryBefore ["checkFilesChanged"] ''
+  #    PATH=$PATH:${lib.makeBinPath [ pkgs.git ]}
+  #    git -C ${builtins.toString repository} pull
+  #  '';
+  #    || ${pkgs.git}/bin/git clone https://github.com/aeliusrs/system.git ${builtins.toString repository}
 
   home.username = "${myuser}";
   home.homeDirectory = "/home/${myuser}";
@@ -19,11 +24,11 @@ in
 
   home.keyboard = {
     layout = lib.mkForce "us";
-   ### this does not work, rely on ~/.scripts/kb-layout
-   # options = lib.mkForce [
-   #   "caps:swapcaps"
-   #   "compose:ralt"
-   # ];
+    ### this does not work, rely on ~/.scripts/kb-layout
+    # options = lib.mkForce [
+    #   "caps:swapcaps"
+    #   "compose:ralt"
+    # ];
   };
 
   # This value determines the Home Manager release that your
@@ -50,9 +55,9 @@ in
     firefox
     fzf
     galculator
-    gcolor2
+    gcolor3
     git
-    gnumake #to have make !
+    gnumake # to have make !
     gnutar
     gparted
     i3lock
@@ -75,14 +80,14 @@ in
     polybar
     python312Packages.pygobject3 # dmenu_network dep
     qjackctl
-    redshift #change color3500
+    redshift # change color3500
     shellcheck
     soundconverter
     sshfs
     terminus-nerdfont
     terminus_font
     tmux
-    transmission-gtk
+    transmission_3-gtk
     ueberzugpp
     unifont
     unzip
@@ -119,12 +124,9 @@ in
     userName = "clement.richard";
     userEmail = "clement.richard@n-hop.com";
     # extraConfig = {
-      # credential.helper = "store";
+    # credential.helper = "store";
     # };
   };
-
-
-
 
   # ========================================================================= #
   # ------------------------------------------------------------------------- #
@@ -132,57 +134,57 @@ in
 
   home.file.".zshrc".enable = false; # remove zshrc linking from HM
 
-  home.activation.setDotfiles = lib.hm.dag.entryAfter ["writeBoundary"] ''
-  ## HOME-MANAGER
-  mkdir -p ~/.config/home-manager
-  ln -fs ${repository}/nix/work-laptop/home.nix ~/.config/home-manager/home.nix
+  home.activation.setDotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ## HOME-MANAGER
+    mkdir -p ~/.config/home-manager
+    ln -fs ${repository}/nix/work-laptop/home.nix ~/.config/home-manager/home.nix
 
-  ## ZSH
-  ln -fs ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
-  ln -fsT ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh
-  chmod -Rv u+w ~/.ocha-zsh || :
-  chmod -Rv u+w ~/.zshrc || :
+    ## ZSH
+    ln -fs ${repository}/dotfiles/zsh/zshrc       ~/.zshrc
+    ln -fsT ${repository}/dotfiles/zsh/ocha-zsh    ~/.ocha-zsh
+    chmod -Rv u+w ~/.ocha-zsh || :
+    chmod -Rv u+w ~/.zshrc || :
 
-  ## TMUX
-  ln -fs ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
-  ln -fsT ${repository}/dotfiles/tmux/tmux       ~/.tmux
-  chmod -Rv u+w ~/.tmux || :
-  chmod -Rv u+w ~/.tmux.conf || :
+    ## TMUX
+    ln -fs ${repository}/dotfiles/tmux/tmux.conf  ~/.tmux.conf
+    ln -fsT ${repository}/dotfiles/tmux/tmux       ~/.tmux
+    chmod -Rv u+w ~/.tmux || :
+    chmod -Rv u+w ~/.tmux.conf || :
 
 
-  ## SCRIPTS
-  ln -fsT ${repository}/dotfiles/scripts         ~/.scripts
+    ## SCRIPTS
+    ln -fsT ${repository}/dotfiles/scripts         ~/.scripts
 
-  ## GTK2
-  ln -fs ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
+    ## GTK2
+    ln -fs ${repository}/dotfiles/gtkrc-2.0       ~/.gtkrc-2.0
 
-  ## MIMEAPPS
-  ln -fs ${repository}/dotfiles/mimeapps.list   ~/.config/
+    ## MIMEAPPS
+    ln -fs ${repository}/dotfiles/mimeapps.list   ~/.config/
 
-  ## ALACRITTY
-  ln -fs ${repository}/dotfiles/alacritty       ~/.config/
+    ## ALACRITTY
+    ln -fs ${repository}/dotfiles/alacritty       ~/.config/
 
-  ## NVIM
-  ln -fs ${repository}/dotfiles/nvim            ~/.config/
+    ## NVIM
+    ln -fs ${repository}/dotfiles/nvim            ~/.config/
 
-  ## OPENBOX
-  ln -fs ${repository}/dotfiles/openbox         ~/.config/
+    ## OPENBOX
+    ln -fs ${repository}/dotfiles/openbox         ~/.config/
 
-  ## PICOM
-  ln -fs ${repository}/dotfiles/picom           ~/.config/
+    ## PICOM
+    ln -fs ${repository}/dotfiles/picom           ~/.config/
 
-  ## POLYBAR
-  ln -fs ${repository}/dotfiles/polybar         ~/.config/
+    ## POLYBAR
+    ln -fs ${repository}/dotfiles/polybar         ~/.config/
 
-  ## GTK3
-  ln -fs ${repository}/dotfiles/gtk-3.0         ~/.config/
+    ## GTK3
+    ln -fs ${repository}/dotfiles/gtk-3.0         ~/.config/
   '';
 
   # ========================================================================= #
   # ------------------------------------------------------------------------- #
   # Install Assets
 
-  home.activation.setAssets = lib.hm.dag.entryAfter ["setDotfiles"] ''
+  home.activation.setAssets = lib.hm.dag.entryAfter [ "setDotfiles" ] ''
     mkdir -p ~/.local/share/fonts
     cp -u ${repository}/dotfiles/Xresources ~/.Xresources || :
     cp -ru ${repository}/assets/fonts       ~/.local/share/ || :
@@ -190,10 +192,15 @@ in
     cp -ru ${repository}/assets/themes      ~/.themes/ || :
   '';
 
-  home.activation.nvimSetup = lib.hm.dag.entryAfter ["setAssets"] ''
-    PATH=$PATH:${lib.makeBinPath [ pkgs.neovim pkgs.git pkgs.python311 ]}
+  home.activation.nvimSetup = lib.hm.dag.entryAfter [ "setAssets" ] ''
+    PATH=$PATH:${
+      lib.makeBinPath [
+        pkgs.neovim
+        pkgs.git
+        pkgs.python311
+      ]
+    }
     nvim --headless +'PlugInstall' +qa || :
     nvim --headless +'UpdateRemotePlugins' +qa || :
   '';
 }
-
