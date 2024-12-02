@@ -153,7 +153,7 @@ in
     udisks              # to manage USB automount
     libvirt             # to manage VM
     qemu_full           # to have VM
-    vagrant             # a nice VM manager
+    #vagrant             # a nice VM manager
     guestfs-tools       # to have better integration with vagrant
     docker              # to have old school containers
     docker-compose      # to have containers composition

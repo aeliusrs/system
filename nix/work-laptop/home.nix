@@ -34,7 +34,7 @@ in
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "24.05";
+  home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
     alacritty
@@ -86,7 +86,6 @@ in
     ueberzugpp
     unifont
     unzip
-    #vagrant
     viewnior
     vimix-icon-theme
     virt-manager
@@ -106,9 +105,7 @@ in
     zsh
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
 
   programs.zsh.enable = true;
 
