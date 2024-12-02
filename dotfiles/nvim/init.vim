@@ -1,4 +1,15 @@
 "____________________________________"
+"filetype plugin indent on
+
+call plug#begin()
+	Plug 'rebelot/kanagawa.nvim'
+	Plug 'neomake/neomake'
+	Plug 'mattn/emmet-vim'
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'JellyApple102/easyread.nvim', { 'do': ':UpdateRemotePlugins', 'branch': 'main' }
+call plug#end()
+
+"____________________________________"
 :set number relativenumber
 :set cc=80
 :set clipboard=unnamedplus
@@ -11,7 +22,9 @@ let g:impact_transbg=1
 
 "___________________________________"
 :syntax on
-:colorscheme ocha-color
+:colorscheme kanagawa-dragon
+":colorscheme ocha-color
+":colorscheme old_codedark
 "set termguicolors
 
 "___________________________________"
@@ -43,15 +56,6 @@ hi SpecialKey ctermfg=8
 :set synmaxcol=300
 :set regexpengine=1
 
-"____________________________________"
-"filetype plugin indent on
-call plug#begin()
-	Plug 'rebelot/kanagawa.nvim'
-	Plug 'neomake/neomake'
-	Plug 'mattn/emmet-vim'
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'JellyApple102/easyread.nvim', { 'do': ':UpdateRemotePlugins', 'branch': 'main' }
-call plug#end()
 
 "____________________________________ EasyRead"
 :luafile ~/.config/nvim/easyreadconf.lua

@@ -87,7 +87,7 @@ let s:cdSplitLight = {'gui': '#898989', 'cterm': s:cterm04, 'cterm256': '245'}
 let s:cdSplitDark = {'gui': '#444444', 'cterm': s:cterm03, 'cterm256': '238'}
 let s:cdSplitThumb = {'gui': '#424242', 'cterm': s:cterm04, 'cterm256': '238'}
 
-let s:cdCursorLine = {'gui': '#2D2FFF', 'cterm': s:cterm01, 'cterm256': '237'}
+let s:cdCursorLine = {'gui': '#51504F', 'cterm': s:cterm01, 'cterm256': '239'}
 let s:cdCursorDarkDark = {'gui': '#222222', 'cterm': s:cterm01, 'cterm256': '235'}
 let s:cdCursorDark = {'gui': '#51504F', 'cterm': s:cterm03, 'cterm256': '239'}
 let s:cdCursorLight = {'gui': '#003343', 'cterm': s:cterm04, 'cterm256': '145'}

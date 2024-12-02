@@ -50,7 +50,7 @@ in
     firefox
     fzf
     galculator
-    gcolor2
+    gcolor3
     git
     gnumake #to have make !
     gnutar
@@ -82,11 +82,11 @@ in
     terminus-nerdfont
     terminus_font
     tmux
-    transmission-gtk
+    transmission_4-gtk
     ueberzugpp
     unifont
     unzip
-    vagrant
+    #vagrant
     viewnior
     vimix-icon-theme
     virt-manager

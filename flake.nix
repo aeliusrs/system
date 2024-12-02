@@ -2,8 +2,7 @@
   description = "NixOs configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-next.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,19 +25,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.aeliusrs = import ./nix/work-laptop/home.nix;
-            }
-            {
-              nixpkgs.overlays = [
-                (final: prev: {
-                  sops =
-                    let
-                      pkgs = import inputs.nixpkgs-next {
-                        inherit (final) system;
-                      };
-                    in
-                    pkgs.sops;
-                })
-              ];
             }
           ];
           specialArgs = {

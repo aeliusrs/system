@@ -9,7 +9,7 @@ in
       ./hardware-configuration.nix
     ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -153,6 +153,7 @@ in
     udisks              # to manage USB automount
     libvirt             # to manage VM
     qemu_full           # to have VM
+    vagrant             # a nice VM manager
     guestfs-tools       # to have better integration with vagrant
     docker              # to have old school containers
     docker-compose      # to have containers composition
