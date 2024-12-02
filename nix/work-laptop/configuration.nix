@@ -1,49 +1,54 @@
-{ config, pkgs, flake, ... }:
+{
+  config,
+  pkgs,
+  flake,
+  ...
+}:
 let
-   myuser = "aeliusrs";
-#   edk2-aarch64 = pkgs.callPackage "/etc/nixos/edk2-aarch64.nix" {};
+  myuser = "aeliusrs";
 in
+#   edk2-aarch64 = pkgs.callPackage "/etc/nixos/edk2-aarch64.nix" {};
 {
   imports = [
-      ./system.nix
-      ./hardware-configuration.nix
-    ];
+    ./system.nix
+    ./hardware-configuration.nix
+  ];
 
   system.stateVersion = "24.11";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # To be able to cross compile to ARM
 
-# boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-#   nixpkgs.overlays = [ 
-#      (final: prev: {
-#        OVMF = prev.OVMF.overrideAttrs (oldAttrs: {
-#          postInstall = (oldAttrs.postInstall or "") + ''
-#            mkdir -vp $fd/FV
-#            cp -v ${edk2-aarch64}/aarch64/QEMU_CODE.fd $fd/FV/AAVMF_CODE.fd
-#            cp -v ${edk2-aarch64}/aarch64/QEMU_VARS.fd $fd/FV/AAVMF_VARS.fd
-#          '';
-#        });
-#      })
-#    ];
-
+  # boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  nixpkgs.overlays = [
+    (import ./warp-overlay.nix)
+    (import ../overlays { inherit flake; })
+    #      (final: prev: {
+    #        OVMF = prev.OVMF.overrideAttrs (oldAttrs: {
+    #          postInstall = (oldAttrs.postInstall or "") + ''
+    #            mkdir -vp $fd/FV
+    #            cp -v ${edk2-aarch64}/aarch64/QEMU_CODE.fd $fd/FV/AAVMF_CODE.fd
+    #            cp -v ${edk2-aarch64}/aarch64/QEMU_VARS.fd $fd/FV/AAVMF_VARS.fd
+    #          '';
+    #        });
+    #      })
+  ];
 
   # Decrypt got a GUI
-  boot.initrd.systemd.enable = true; #authorize plymouth in stage 1
+  boot.initrd.systemd.enable = true; # authorize plymouth in stage 1
   boot.plymouth.enable = true;
   boot.plymouth.theme = "breeze";
-  boot.kernelParams = ["quiet"];
+  boot.kernelParams = [ "quiet" ];
 
   # Setup keyfile
   boot.initrd.secrets = {
     "/crypto_keyfile.bin" = null;
   };
-
 
   # Hostname
   networking.hostName = "arrow"; # Define your hostname.
@@ -51,7 +56,7 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # networking.wireless.enable = true; 
+  # networking.wireless.enable = true;
   networking.firewall.enable = true;
   networking.nftables.enable = true;
 
@@ -59,7 +64,12 @@ in
   # networking.firewall.allowedUDPPorts = [ 67 68 ];
 
   # Add Libvirt and Podman interface to trustedInterfaces
-  networking.firewall.trustedInterfaces = [ "virbr*" "podman*" "docker*" "tailscale*" ];
+  networking.firewall.trustedInterfaces = [
+    "virbr*"
+    "podman*"
+    "docker*"
+    "tailscale*"
+  ];
 
   networking.wireguard.enable = true;
 
@@ -67,14 +77,14 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-#  networking.extraHosts = ''
-#    192.168.3.150 bastion-dev.n-hop.com registry.bastion-dev.n-hop.com sources.bastion-dev.n-hop.com
-#  '';
+  #  networking.extraHosts = ''
+  #    192.168.3.150 bastion-dev.n-hop.com registry.bastion-dev.n-hop.com sources.bastion-dev.n-hop.com
+  #  '';
 
   services.resolved.enable = true;
 
   # Set your time zone.
-# Select internationalisation properties.
+  # Select internationalisation properties.
   time.timeZone = "Asia/Hong_Kong";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -93,12 +103,11 @@ in
 
   # Configure X11
   services.xserver = {
-    enable = true;                       # enable X11
+    enable = true; # enable X11
     windowManager.openbox.enable = true; # enable Openbox
     xkb.layout = "us";
     xkb.variant = "";
   };
-
 
   # Configure LightDM themes
   services.xserver.displayManager.lightdm.greeters.gtk.enable = true;
@@ -116,9 +125,8 @@ in
       "docker"
     ];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -136,43 +144,42 @@ in
     htop
     sshpass
     ssh-agents
-    ssh-to-age          # Converter sshkey to age key
-    age                 # A mozilla based encryption keys
-    sops                # A secret manager
-    yq                  # a jq for yaml
+    ssh-to-age # Converter sshkey to age key
+    age # A mozilla based encryption keys
+    sops # A secret manager
+    yq # a jq for yaml
     file
     direnv
     python311
-    powertop            # Intel Base power analyze
+    powertop # Intel Base power analyze
     nixos-bgrt-plymouth # nice theme for plymouth
     lightdm-gtk-greeter # nice theme for lightDM
-    home-manager        # a Nix Dotfiles manager for users
-    light               # to manage brightness
-    alsa-utils          # to manage audio card
-    pipewire            # to manage sound
-    udisks              # to manage USB automount
-    libvirt             # to manage VM
-    qemu_full           # to have VM
-    #vagrant             # a nice VM manager
-    guestfs-tools       # to have better integration with vagrant
-    docker              # to have old school containers
-    docker-compose      # to have containers composition
-    docui               # a docker TUI interface
+    home-manager # a Nix Dotfiles manager for users
+    light # to manage brightness
+    alsa-utils # to manage audio card
+    pipewire # to manage sound
+    udisks # to manage USB automount
+    libvirt # to manage VM
+    qemu_full # to have VM
+    guestfs-tools # to have better integration with vagrant
+    docker # to have old school containers
+    docker-compose # to have containers composition
+    docui # a docker TUI interface
     #podman              # to have containers
     #podman-compose      # to do containers composition
-    pciutils            # lspci
-    usbutils            # lsusb
-    dnsutils            # nslookup
-    via                 # keyboard configurator
-    vial                # keyboard configurator
-    openssl             # to manipulate ssl
-    wireguard-tools     # tools to use wireguard
-    cloudflare-warp     # Cloudflare warp tools to esc the gfw
-    polkit              # Policy engine for unprivileged process
-    gparted             # Partition tool
-    mosh                # Nice ssh
-    #lldpd              # link layer discovery proto daemon 
-    tailscale           # tailscale client
+    pciutils # lspci
+    usbutils # lsusb
+    dnsutils # nslookup
+    via # keyboard configurator
+    vial # keyboard configurator
+    openssl # to manipulate ssl
+    wireguard-tools # tools to use wireguard
+    cloudflare-warp # Cloudflare warp tools to esc the gfw
+    polkit # Policy engine for unprivileged process
+    gparted # Partition tool
+    mosh # Nice ssh
+    #lldpd              # link layer discovery proto daemon
+    tailscale # tailscale client
   ];
 
   # LLPD
@@ -181,8 +188,6 @@ in
   # Cloudflare
   systemd.packages = with pkgs; [ cloudflare-warp ]; # for warp-cli
   systemd.targets.multi-user.wants = [ "warp-svc.service" ];
-
-  nixpkgs.overlays = [ (import ./warp-overlay.nix) ];
 
   # BPFTune
   services.bpftune.enable = true;
@@ -193,14 +198,16 @@ in
   '';
 
   # Path
-  system.activationScripts.makeDir = with pkgs; lib.stringAfter [ "var" ] ''
-    mkdir -p /opt
+  system.activationScripts.makeDir =
+    with pkgs;
+    lib.stringAfter [ "var" ] ''
+      mkdir -p /opt
 
-    mkdir -p /home/${myuser}/Pictures /home/${myuser}/Videos /home/${myuser}/Music
-    mkdir -p /home/${myuser}/Desktop /home/${myuser}/Documents /home/${myuser}/Downloads
-    mkdir -p /home/${myuser}/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/${myuser}
-    chown -R 1000:users /home/${myuser}
-  '';
+      mkdir -p /home/${myuser}/Pictures /home/${myuser}/Videos /home/${myuser}/Music
+      mkdir -p /home/${myuser}/Desktop /home/${myuser}/Documents /home/${myuser}/Downloads
+      mkdir -p /home/${myuser}/.local/state/home-manager/profiles /nix/var/nix/profiles/per-user/${myuser}
+      chown -R 1000:users /home/${myuser}
+    '';
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -212,11 +219,10 @@ in
       TCPKeepAlive = "no";
       MaxSessions = 2;
     };
-#    extraConfig = ''
-#      CanonicalizeHostname yes
-#    '';
+    #    extraConfig = ''
+    #      CanonicalizeHostname yes
+    #    '';
   };
-
 
   # Activate pipewire
   security.rtkit.enable = true;
@@ -225,7 +231,7 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true; # to support Pavucontrol GUI
-    jack.enable = true;  # to support DAW
+    jack.enable = true; # to support DAW
   };
 
   # automount Device
@@ -237,14 +243,17 @@ in
     libvirtd = {
       enable = true;
       qemu = {
-       ovmf = {
-        enable = true;
-        packages = [ pkgs.OVMFFull.fd pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd ];
+        ovmf = {
+          enable = true;
+          packages = [
+            pkgs.OVMFFull.fd
+            pkgs.pkgsCross.aarch64-multiplatform.OVMF.fd
+          ];
         };
       };
     };
     docker = {
-      enable = true; 
+      enable = true;
     };
     podman = {
       enable = true;
@@ -257,7 +266,7 @@ in
         dns_enabled = true;
       };
     };
-    containers.registries.insecure = [];
+    containers.registries.insecure = [ ];
   };
 
   # activate zsh
@@ -270,12 +279,11 @@ in
   programs.light.enable = true;
 
   # activate zsh
-  programs.dconf.enable = true; #so virt-manager can remember stuff
+  programs.dconf.enable = true; # so virt-manager can remember stuff
 
   # activate bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
 
   services.udev.packages = with pkgs; [
     via
@@ -291,7 +299,7 @@ in
     gc = {
       automatic = true;
       dates = "weekly";
-#      options = "--delete-older-than 7d";
+      #      options = "--delete-older-than 7d";
     };
 
     settings = {
@@ -315,8 +323,8 @@ in
 
         # Allows Nix to execute builds inside cgroups
         "cgroups"
-        # "configurable-impure-env" 
-        # "ca-derivations" 
+        # "configurable-impure-env"
+        # "ca-derivations"
       ];
     };
   };
@@ -327,36 +335,36 @@ in
       useRoutingFeatures = "both";
       openFirewall = true;
       interfaceName = "tailscale0";
-#      extraUpFlags =
-#        [
-#        "--reset"
-#        "--accept-routes=true"
-#        "--accept-dns=true"
-#        "--login-server=https://headscale.mehrdad.cc"
-#        "--auth-key=${cfg.authKey}"
-#        ];
+      #      extraUpFlags =
+      #        [
+      #        "--reset"
+      #        "--accept-routes=true"
+      #        "--accept-dns=true"
+      #        "--login-server=https://headscale.mehrdad.cc"
+      #        "--auth-key=${cfg.authKey}"
+      #        ];
     };
 
-#  systemd.services = {
-## Workaround for slow switch due to wait-online
-## Issue: https://github.com/NixOS/nixpkgs/issues/180175
-#    NetworkManager-wait-online.enable = lib.mkForce false;
-#    systemd-networkd-wait-online.enable = lib.mkForce false;
-## The authkey does not work with the default tailscale package
-#    tailscaled-autoconnect = lib.mkIf (config.services.tailscale.extraUpFlags != null) {
-#      after = [ "tailscaled.service" ];
-#      wants = [ "tailscaled.service" ];
-#      wantedBy = [ "multi-user.target" ];
-#      serviceConfig = {
-#        Type = "oneshot";
-#      };
-#      script = ''
-#        status=$(${config.systemd.package}/bin/systemctl show -P StatusText tailscaled.service)
-#        if [[ $status != Connected* ]]; then
-#          ${config.services.tailscale.package}/bin/tailscale up ${lib.escapeShellArgs config.services.tailscale.extraUpFlags}
-#      fi
-#        '';
-#    };
+    #  systemd.services = {
+    ## Workaround for slow switch due to wait-online
+    ## Issue: https://github.com/NixOS/nixpkgs/issues/180175
+    #    NetworkManager-wait-online.enable = lib.mkForce false;
+    #    systemd-networkd-wait-online.enable = lib.mkForce false;
+    ## The authkey does not work with the default tailscale package
+    #    tailscaled-autoconnect = lib.mkIf (config.services.tailscale.extraUpFlags != null) {
+    #      after = [ "tailscaled.service" ];
+    #      wants = [ "tailscaled.service" ];
+    #      wantedBy = [ "multi-user.target" ];
+    #      serviceConfig = {
+    #        Type = "oneshot";
+    #      };
+    #      script = ''
+    #        status=$(${config.systemd.package}/bin/systemctl show -P StatusText tailscaled.service)
+    #        if [[ $status != Connected* ]]; then
+    #          ${config.services.tailscale.package}/bin/tailscale up ${lib.escapeShellArgs config.services.tailscale.extraUpFlags}
+    #      fi
+    #        '';
+    #    };
   };
 
   networking.firewall = {

@@ -1,8 +1,9 @@
-{ pkgs ? import <nixpkgs> { system = builtins.currentSystem; }
-, lib ? pkgs.lib
-, stdenv ? pkgs.stdenv
-, fetchurl ? pkgs.fetchurl
-, autoPatchelfHook ? pkgs.autoPatchelfHook
+{
+  pkgs ? import <nixpkgs> { system = builtins.currentSystem; },
+  lib ? pkgs.lib,
+  stdenv ? pkgs.stdenv,
+  fetchurl ? pkgs.fetchurl,
+  autoPatchelfHook ? pkgs.autoPatchelfHook,
 }:
 
 stdenv.mkDerivation rec {
@@ -15,7 +16,7 @@ stdenv.mkDerivation rec {
   };
 
   # nativeBuildInputs = [
-    # autoPatchelfHook
+  # autoPatchelfHook
   # ];
 
   buildInputs = [
@@ -36,4 +37,3 @@ stdenv.mkDerivation rec {
     architectures = [ "amd64" ];
   };
 }
-
