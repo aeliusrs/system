@@ -22,9 +22,9 @@ let g:impact_transbg=1
 
 "___________________________________"
 :syntax on
-:colorscheme kanagawa-dragon
+":colorscheme kanagawa-dragon
 ":colorscheme ocha-color
-":colorscheme old_codedark
+:colorscheme old_codedark
 "set termguicolors
 
 "___________________________________"
