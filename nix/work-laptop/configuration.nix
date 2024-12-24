@@ -137,49 +137,50 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    man-pages
-    man-pages-posix
-    vim
-    wget
-    htop
-    sshpass
-    ssh-agents
-    ssh-to-age # Converter sshkey to age key
+    #lldpd               # link layer discovery proto daemon
+    #podman              # to have containers
+    #podman-compose      # to do containers composition
     age # A mozilla based encryption keys
-    sops # A secret manager
-    yq # a jq for yaml
-    file
-    direnv
-    python311
-    powertop # Intel Base power analyze
-    nixos-bgrt-plymouth # nice theme for plymouth
-    lightdm-gtk-greeter # nice theme for lightDM
-    home-manager # a Nix Dotfiles manager for users
-    light # to manage brightness
     alsa-utils # to manage audio card
-    pipewire # to manage sound
-    udisks # to manage USB automount
-    libvirt # to manage VM
-    qemu_full # to have VM
-    guestfs-tools # to have better integration with vagrant
+    cloudflare-warp # Cloudflare warp tools to esc the gfw
+    direnv
+    dnsutils # nslookup
     docker # to have old school containers
     docker-compose # to have containers composition
     docui # a docker TUI interface
-    #podman              # to have containers
-    #podman-compose      # to do containers composition
+    file
+    gparted # Partition tool
+    guestfs-tools # to have better integration with vagrant
+    home-manager # a Nix Dotfiles manager for users
+    htop
+    libvirt # to manage VM
+    light # to manage brightness
+    lightdm-gtk-greeter # nice theme for lightDM
+    man-pages
+    man-pages-posix
+    mosh # Nice ssh
+    nixos-bgrt-plymouth # nice theme for plymouth
+    openssl # to manipulate ssl
     pciutils # lspci
+    pipewire # to manage sound
+    polkit # Policy engine for unprivileged process
+    powertop # Intel Base power analyze
+    python311
+    qemu_full # to have VM
+    sops # A secret manager
+    ssh-agents
+    ssh-to-age # Converter sshkey to age key
+    sshpass
+    tailscale # tailscale client
+    udisks # to manage USB automount
     usbutils # lsusb
-    dnsutils # nslookup
+    vagrant
     via # keyboard configurator
     vial # keyboard configurator
-    openssl # to manipulate ssl
+    vim
+    wget
     wireguard-tools # tools to use wireguard
-    cloudflare-warp # Cloudflare warp tools to esc the gfw
-    polkit # Policy engine for unprivileged process
-    gparted # Partition tool
-    mosh # Nice ssh
-    #lldpd              # link layer discovery proto daemon
-    tailscale # tailscale client
+    yq # a jq for yaml
   ];
 
   # LLPD

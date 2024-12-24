@@ -50,6 +50,8 @@
   };
 
   systemd = {
+    # enable systemd-networkd
+    network.enable = true;
     # Reduce default service stop timeouts for faster shutdown
     extraConfig = ''
       DefaultTimeoutStopSec=15s
@@ -67,6 +69,7 @@
     enable = lib.mkDefault false;
     enableNg = lib.mkDefault true;
   };
+
 
   # nixos/modules/misc/version.nix
   users.motd = ''Welcome to '${config.networking.hostName}' running NixOS ${config.system.nixos.version}!'';
