@@ -77,9 +77,12 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  #  networking.extraHosts = ''
-  #    192.168.3.150 bastion-dev.n-hop.com registry.bastion-dev.n-hop.com sources.bastion-dev.n-hop.com
-  #  '';
+   # networking.extraHosts = ''
+     # 192.168.122.40 core.local
+     # 192.168.122.40 gitlab.core.local
+     # 192.168.122.40 grafana.core.local
+     # 192.168.122.40 keycloak.core.local
+    # '';
 
   services.resolved.enable = true;
 
