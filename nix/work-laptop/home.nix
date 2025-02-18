@@ -87,6 +87,7 @@ in
     sshfs
     terminus-nerdfont
     terminus_font
+    tree
     tmux
     transmission_4-gtk
     ueberzugpp
