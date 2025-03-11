@@ -15,12 +15,8 @@ touch ~/.config/kmonad/config.kbd
 
 cat << EOF >> ~/.config/kmonad/config.kbd
 (defcfg
-  input  (device-file "<path to your keyboard input>")
-  output (uinput-sink "KMonad kbd"))
-
-
-# Go to /dev/input/by-path/ or /dev/input/by-id/ and look for any file ending in kbd.
-# I think if your keyboard is plugable, it should appear in /dev/input/by-id/ and your build-in laptop keyboard should appear in /dev/input/by-path/.
+process-unmapped-keys yes
+)
 
 
 (defsrc
@@ -41,6 +37,5 @@ cat << EOF >> ~/.config/kmonad/config.kbd
   lctl  lmet lalt      spc       ralt cmps rctl                 left   down   rght
   )
 
-kmonad ~/path/to/config
-
+sudo kanata --cfg ~/path/to/config
 ```

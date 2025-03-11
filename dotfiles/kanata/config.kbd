@@ -1,0 +1,75 @@
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  esc   f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11   f12    prnt  ins  del
+  grv   1    2    3    4    5    6    7    8    9    0    -     =      bspc
+  tab   q    w    e    r    t    y    u    i    o    p    [     ]      ret
+  caps  a    s    d    f    g    h    j    k    l    ;    '     \
+  lsft  lsgt z    x    c    v    b    n    m    ,    .    /     rsft    up
+  lctl  cmps met  lalt            spc            ralt rctl left    down   rght
+)
+
+(defalias
+  num (layer-toggle num)
+  nav (layer-toggle nav)
+  opt (layer-toggle opt)
+
+  spc_opt (tap-hold 185 185 spc @opt)
+
+  f_ctl (tap-hold 185 185 f lctl)
+  d_alt (tap-hold 185 185 d lalt)
+  z_sft (tap-hold 185 185 z lsft)
+
+  j_ctl (tap-hold 185 185 j lctl)
+  k_alt (tap-hold 185 185 k lalt)
+  /_sft (tap-hold 185 185 / lsft)
+)
+
+(deflayer base
+  lctl  .    .    .    .    .    .    .    .    .    .    .   .  . . .
+  .     .    .    .    .    .    .    .    .    .    .    .   .   .
+  tab   q    w    e    r    t    y    u    i    o    p    .   .   .
+  esc   a    s    @d_alt    @f_ctl    g    h    @j_ctl    @k_alt    l    ;    .   .
+  lsft  .    @z_sft    x    c    v    b    n    m    ,    .    @/_sft   .   .
+  @opt  .    met @nav           @spc_opt           @num met .  .   .
+)
+
+(deflayer num
+  .     .    .    .    .    .    .    .    .    .    .    .    .  . . .
+  .     .    .    .    .    .    .    .    .    .    .    .    .   .
+  .     1    2    3    4    5    .    .    .    .    .    .    .   .
+  .     6    7    8    9    0    -    =    [    ]    '    .    .
+  .     lsft .    .    .    .    .    .    .    .    .    rsft .   .
+  .     .   .     .            spc              .    .    .   .   .
+)
+
+(deflayer nav
+  .     .    .    .    .    .    .    .    .    .     .     .   .  . . .
+  .     .    .    .    .    .    .    .    .    .     .     .   .   .
+  .     .    .    .    .    .    .    pgdn pgup .     del   .   .   .
+  .     .    .    .    .    .    left down up   right .     .   .
+  .     .    .    .    .    .    .    home end  .     .     .   .   .
+  .     .   .     .            spc              .     .    .   .   .
+)
+
+
+(deflayer opt
+  .     .    .    .    .    .    .    .    .    .    .    .   .  . . .
+  .     .    .    .    .    .    .    .    .    .    .    .   .   .
+  .     tab  .    .    .    .    .    .    .    .    bspc   .   .   .
+  .     esc  .    .    .    .    .    .    .    .    ret    .   .
+  .     .    .    .    .    .    .    .    .    .    .    .   .   .
+  .     .   .     .            spc              .    .    .   .   .
+)
+
+
+(deflayer null
+  .     .    .    .    .    .    .    .    .    .    .    .   .  . . .
+  .     .    .    .    .    .    .    .    .    .    .    .   .   .
+  .     .    .    .    .    .    .    .    .    .    .    .   .   .
+  .     .    .    .    .    .    .    .    .    .    .    .   .
+  .     .    .    .    .    .    .    .    .    .    .    .   .   .
+  .     .   .     .            spc              .    .    .   .   .
+)
