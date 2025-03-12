@@ -86,6 +86,9 @@ in
      192.168.122.101 harbor.cluster.local
      192.168.122.101 registry.cluster.local
      192.168.122.101 registry-dashboard.cluster.local
+     192.168.122.101 monitor.cluster.local
+     192.168.122.101 prometheus.cluster.local
+     192.168.122.101 loki.cluster.local
 
      # 192.168.122.40 core.local
      # 192.168.122.40 gitlab.core.local
