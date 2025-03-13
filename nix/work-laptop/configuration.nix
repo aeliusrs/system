@@ -78,7 +78,18 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
    networking.extraHosts = ''
-     192.168.122.103 forgejo.cluster.local
+     192.168.122.101 dashboard.cluster.local
+     192.168.122.101 traefik.cluster.local
+     192.168.122.101 forgejo.cluster.local
+     192.168.122.101 longhorn.cluster.local
+     192.168.122.101 openbao.cluster.local
+     192.168.122.101 harbor.cluster.local
+     192.168.122.101 registry.cluster.local
+     192.168.122.101 registry-dashboard.cluster.local
+     192.168.122.101 monitor.cluster.local
+     192.168.122.101 prometheus.cluster.local
+     192.168.122.101 loki.cluster.local
+
      # 192.168.122.40 core.local
      # 192.168.122.40 gitlab.core.local
      # 192.168.122.40 grafana.core.local
@@ -259,6 +270,13 @@ in
     };
     docker = {
       enable = true;
+      daemon.settings = {
+         insecure-registries = [
+          "forgejo.cluster.local"
+          "harbor.cluster.local"
+          "registry.cluster.local"
+         ];
+      };
     };
     podman = {
       enable = true;
@@ -271,7 +289,10 @@ in
         dns_enabled = true;
       };
     };
-    containers.registries.insecure = [ ];
+    containers.registries.insecure = [
+      "harbor.cluster.local"
+      "registry.cluster.local"
+    ];
   };
 
   # activate zsh
