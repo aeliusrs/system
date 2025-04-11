@@ -78,17 +78,19 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
    networking.extraHosts = ''
-     192.168.122.101 dashboard.cluster.local
-     192.168.122.101 traefik.cluster.local
-     192.168.122.101 forgejo.cluster.local
-     192.168.122.101 longhorn.cluster.local
-     192.168.122.101 openbao.cluster.local
-     192.168.122.101 harbor.cluster.local
-     192.168.122.101 registry.cluster.local
-     192.168.122.101 registry-dashboard.cluster.local
-     192.168.122.101 monitor.cluster.local
-     192.168.122.101 prometheus.cluster.local
-     192.168.122.101 loki.cluster.local
+     192.168.122.100 dashboard.cluster.local
+     192.168.122.100 traefik.cluster.local
+     192.168.122.100 forgejo.cluster.local
+     192.168.122.100 longhorn.cluster.local
+     192.168.122.100 openbao.cluster.local
+     192.168.122.100 harbor.cluster.local
+     192.168.122.100 registry.cluster.local
+     192.168.122.100 registry-dashboard.cluster.local
+     192.168.122.100 monitor.cluster.local
+     192.168.122.100 prometheus.cluster.local
+     192.168.122.100 loki.cluster.local
+     172.16.200.232 signoz.cluster.local
+     172.16.200.232 otel.cluster.local
 
      # 192.168.122.40 core.local
      # 192.168.122.40 gitlab.core.local
@@ -196,6 +198,7 @@ in
     wget
     wireguard-tools # tools to use wireguard
     yq # a jq for yaml
+    zed-editor # a vibecoding editor
   ];
 
   # LLPD
